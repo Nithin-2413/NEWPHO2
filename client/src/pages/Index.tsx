@@ -561,7 +561,7 @@ const Index = () => {
       </section>
 
       {/* The Art of Saying It Right - 3D Carousel Section */}
-      <section className="py-32 px-6 bg-gradient-to-b from-muted/10 to-background relative overflow-hidden z-10">
+      <section className="py-40 px-6 bg-gradient-to-b from-muted/10 to-background relative overflow-hidden z-10">
         {/* Cosmic Premium Background */}
         <div className="cosmic-background"></div>
         
@@ -577,7 +577,7 @@ const Index = () => {
           </div>
         </div>
         <div className="max-w-6xl mx-auto relative z-10">
-          <div className="text-center mb-20">
+          <div className="text-center mb-24">
             <h2 className="text-5xl md:text-6xl font-bold mb-8">
               <span className="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
                 The Art of
@@ -591,7 +591,7 @@ const Index = () => {
           </div>
 
           {/* 3D Carousel Container */}
-          <div className="relative w-full h-[400px] flex items-center justify-center">
+          <div className="relative w-full h-[400px] flex items-center justify-center mb-16">
             <div className="carousel-3d-container group">
               <div className="carousel-3d" style={{"--quantity": 9} as React.CSSProperties}>
                 {[

@@ -405,9 +405,9 @@
 .shooting_star {
   position: absolute;
   height: 2px;
-  background: linear-gradient(-45deg, rgba(255, 126, 185, 0.2), rgba(167, 126, 224, 0));
+  background: linear-gradient(-45deg, rgba(255, 126, 185, 0.35), rgba(167, 126, 224, 0));
   border-radius: 999px;
-  filter: drop-shadow(0 0 6px rgba(167, 126, 224, 0.15));
+  filter: drop-shadow(0 0 6px rgba(167, 126, 224, 0.25));
   animation: tail 6000ms ease-in-out infinite, shooting 6000ms ease-in-out infinite;
 }
 
@@ -418,7 +418,7 @@
   top: calc(50% - 1px);
   right: 0;
   height: 2px;
-  background: linear-gradient(-45deg, rgba(167, 126, 224, 0), rgba(255, 126, 185, 0.2), rgba(167, 126, 224, 0));
+  background: linear-gradient(-45deg, rgba(167, 126, 224, 0), rgba(255, 126, 185, 0.35), rgba(167, 126, 224, 0));
   border-radius: 100%;
   animation: shining 6000ms ease-in-out infinite;
 }
