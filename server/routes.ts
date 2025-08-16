@@ -15,6 +15,12 @@ const submitHugSchema = z.object({
   feelings: z.string(),
   story: z.string(),
   specificDetails: z.string().optional(),
+  location: z.object({
+    latitude: z.number(),
+    longitude: z.number(),
+    city: z.string().optional(),
+    country: z.string().optional(),
+  }).optional(),
 });
 
 const sendReplySchema = z.object({
@@ -70,6 +76,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }])
         .select()
         .single();
+
+      if (error) throw error;
+
+      // Log user location if provided
+      if (validatedData.location) {
+        try {
+          await supabaseAdmin
+            .from('user_location_logs')
+            .insert([{
+              hug_id: hug.id,
+              latitude: validatedData.location.latitude,
+              longitude: validatedData.location.longitude,
+              city: validatedData.location.city || null,
+              country: validatedData.location.country || null,
+              ip_address: req.ip || req.connection.remoteAddress || 'unknown',
+              user_agent: req.get('User-Agent') || 'unknown'
+            }]);
+        } catch (logError) {
+          console.error('Failed to log user location:', logError);
+          // Don't fail the submission if location logging fails
+        }
+      }
 
       if (error) throw error;
 

@@ -7,6 +7,13 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { Heart, Send } from 'lucide-react';
 
+interface LocationData {
+  latitude: number;
+  longitude: number;
+  city?: string;
+  country?: string;
+}
+
 interface FormData {
   name: string;
   email: string;
@@ -17,6 +24,7 @@ interface FormData {
   feelings: string;
   story: string;
   specificDetails: string;
+  location?: LocationData;
 }
 
 const ContactForm = () => {
@@ -32,6 +40,48 @@ const ContactForm = () => {
     story: '',
     specificDetails: ''
   });
+  const [locationData, setLocationData] = useState<LocationData | null>(null);
+
+  // Capture location silently when component mounts
+  useEffect(() => {
+    const getLocation = async () => {
+      if ('geolocation' in navigator) {
+        try {
+          const position = await new Promise<GeolocationPosition>((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(
+              resolve,
+              reject,
+              { enableHighAccuracy: true, timeout: 10000, maximumAge: 300000 }
+            );
+          });
+
+          const location: LocationData = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          };
+
+          // Try to get city and country from reverse geocoding
+          try {
+            const geocodingResponse = await fetch(
+              `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}&localityLanguage=en`
+            );
+            const geocodingData = await geocodingResponse.json();
+            location.city = geocodingData.city || geocodingData.locality;
+            location.country = geocodingData.countryName;
+          } catch (geocodingError) {
+            console.warn('Failed to get location details:', geocodingError);
+          }
+
+          setLocationData(location);
+        } catch (error) {
+          console.warn('Location access not available:', error);
+          // Silently continue without location if user denies or it fails
+        }
+      }
+    };
+
+    getLocation();
+  }, []);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -52,7 +102,10 @@ const ContactForm = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          ...formData,
+          location: locationData
+        })
       });
 
       const result = await response.json();

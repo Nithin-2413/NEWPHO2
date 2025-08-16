@@ -408,35 +408,35 @@ const Index = () => {
           </div>
 
           <div className="space-y-8 text-lg leading-relaxed text-muted-foreground">
-            <p className="text-xl font-medium text-primary times-new-roman-italic">
+            <p className="text-xl font-bold text-muted-foreground times-new-roman-italic">
               It began with a late-night "HELP!" — a friend with so much to say, but no way to say it.
             </p>
 
-            <p>
+            <p className="text-muted-foreground times-new-roman-italic">
               They tried. They stumbled. They gave up. Then they called Onaamika.
             </p>
 
-            <p>
+            <p className="text-muted-foreground times-new-roman-italic">
               She listened. She felt. She wrote.
             </p>
 
-            <p className="text-xl font-semibold text-foreground times-new-roman-italic">
+            <p className="text-xl font-bold text-muted-foreground times-new-roman-italic">
               And when the message reached its heart, it didn't just get read — it connected, it healed, it made someone truly smile.
             </p>
 
-            <p className="text-lg font-medium text-primary times-new-roman-italic">
+            <p className="text-lg font-bold text-muted-foreground times-new-roman-italic">
               That night, we learned something simple but powerful:<br />
               We all feel deeply, but not all of us can put those feelings into words.<br />
               And sometimes, what's left unsaid is lost forever.
             </p>
 
             <div className="bg-gradient-to-r from-pink-50/50 to-purple-50/50 p-8 rounded-3xl border border-pink-200/30">
-              <p className="text-xl font-semibold text-foreground mb-4">Because let's be honest —</p>
-              <p className="times-new-roman-italic">We live in a world where people are constantly feeling deeply…</p>
-              <p className="font-medium times-new-roman-italic">…but rarely saying it meaningfully.</p>
+              <p className="text-xl font-bold text-muted-foreground times-new-roman-italic mb-4">Because let's be honest —</p>
+              <p className="text-muted-foreground times-new-roman-italic">We live in a world where people are constantly feeling deeply…</p>
+              <p className="font-bold text-muted-foreground times-new-roman-italic">…but rarely saying it meaningfully.</p>
             </div>
 
-            <p>
+            <p className="text-muted-foreground times-new-roman-italic">
               Most of us are either too busy, too shy, or just not fluent in "emotional poetry."<br />
               And that's okay. That's where we come in.
             </p>
@@ -447,22 +447,22 @@ const Index = () => {
               </p>
             </div>
 
-            <p>
+            <p className="text-muted-foreground times-new-roman-italic">
               At The Written Hug, we turn raw, unspoken feelings into beautiful, soul-stirring letters.<br />
               Love, gratitude, apology, celebration — whatever's on your heart, we craft it into words that move people.
             </p>
 
-            <p>
+            <p className="text-muted-foreground times-new-roman-italic">
               And we don't just write — we create.<br />
               Each message is carefully written, lovingly designed, and delivered with a personal touch that feels like a handwritten hug.
             </p>
 
             <div className="bg-gradient-to-r from-yellow-50/50 to-orange-50/50 p-8 rounded-3xl border border-yellow-200/30">
-              <p className="text-xl font-semibold text-foreground mb-2">Why?</p>
-              <p className="times-new-roman-italic">Because in a world full of auto-replies and emoji shortcuts, authentic emotion stands out.</p>
+              <p className="text-xl font-bold text-muted-foreground times-new-roman-italic mb-2">Why?</p>
+              <p className="text-muted-foreground times-new-roman-italic">Because in a world full of auto-replies and emoji shortcuts, authentic emotion stands out.</p>
             </div>
 
-            <p className="text-xl text-center font-medium text-primary times-new-roman-italic">
+            <p className="text-xl text-center font-bold text-muted-foreground times-new-roman-italic">
               So if you're someone who feels a lot but freezes at the keyboard, don't worry — we've made it our art to say what you can't.
             </p>
           </div>
@@ -587,6 +587,9 @@ const Index = () => {
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               These moments began with someone's feelings and ended with someone's smile.
+            </p>
+            <p className="text-lg text-muted-foreground/80 max-w-2xl mx-auto mt-4">
+              See how we delivered it...
             </p>
           </div>
 
