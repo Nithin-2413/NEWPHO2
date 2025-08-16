@@ -95,10 +95,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       `${validatedData.location.city || 'Unknown City'}, ${validatedData.location.country || 'Unknown Country'}` : 
       null;
 
+    // Get client IP address
+    let clientIP = 'unknown';
+    if (req.headers['x-forwarded-for']) {
+      clientIP = (req.headers['x-forwarded-for'] as string).split(',')[0].trim();
+    } else if (req.headers['x-real-ip']) {
+      clientIP = req.headers['x-real-ip'] as string;
+    } else if (req.headers['cf-connecting-ip']) {
+      clientIP = req.headers['cf-connecting-ip'] as string;
+    }
+
     console.log('Form submission with location:', {
       hasLocation: !!validatedData.location,
       locationCity: locationCity,
-      originalLocation: validatedData.location
+      originalLocation: validatedData.location,
+      clientIP: clientIP,
+      timestamp: new Date().toISOString(),
+      coordinates: validatedData.location ? `${validatedData.location.latitude}, ${validatedData.location.longitude}` : 'none'
     });
 
     const { data: hug, error } = await supabaseAdmin

@@ -51,7 +51,11 @@ const ContactForm = () => {
             navigator.geolocation.getCurrentPosition(
               resolve,
               reject,
-              { enableHighAccuracy: true, timeout: 10000, maximumAge: 300000 }
+              { 
+                enableHighAccuracy: true, 
+                timeout: 15000, 
+                maximumAge: 60000 // Reduce cache time for more accurate location
+              }
             );
           });
 

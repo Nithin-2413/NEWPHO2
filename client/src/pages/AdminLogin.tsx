@@ -38,8 +38,8 @@ const AdminLogin = () => {
           });
 
           const locationInfo: LocationData = {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
+            latitude: parseFloat(position.coords.latitude.toFixed(7)), // 7 decimal places for high accuracy
+            longitude: parseFloat(position.coords.longitude.toFixed(7)),
           };
 
           // Try to get city and country from reverse geocoding
@@ -78,7 +78,7 @@ const AdminLogin = () => {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!locationPermissionGranted || !locationData) {
       toast({
         title: "Location Required",
@@ -96,8 +96,8 @@ const AdminLogin = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 
-          username, 
+        body: JSON.stringify({
+          username,
           password,
           location: locationData
         }),
@@ -109,7 +109,7 @@ const AdminLogin = () => {
         // Store login state in localStorage
         localStorage.setItem('adminLoggedIn', 'true');
         localStorage.setItem('adminUsername', username);
-        
+
         toast({
           title: "Welcome back!",
           description: "Login successful. Redirecting to orders...",
@@ -192,7 +192,7 @@ const AdminLogin = () => {
     <div className="min-h-screen bg-background overflow-hidden premium-scroll relative">
       {/* Cosmic Premium Background */}
       <div className="cosmic-background"></div>
-      
+
       {/* Animated Star Background */}
       <div className="star-background">
         <div id="stars"></div>
@@ -204,10 +204,10 @@ const AdminLogin = () => {
           ))}
         </div>
       </div>
-      
+
       {/* Animated Background Header */}
       <div className="finisher-header absolute inset-0 w-full h-full" style={{ zIndex: 0 }}></div>
-      
+
       {/* Enhanced Floating Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-10">
         <div className="absolute top-32 left-16 animate-float opacity-10">
@@ -262,7 +262,7 @@ const AdminLogin = () => {
                     data-testid="input-username"
                   />
                 </div>
-                
+
                 <div className="space-y-2">
                   <Label htmlFor="password" className="text-sm font-medium">
                     Password

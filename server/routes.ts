@@ -387,11 +387,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
         if (location) {
           try {
             const locationString = `${location.city || 'Unknown City'}, ${location.country || 'Unknown Country'} (${location.latitude}, ${location.longitude})`;
+            
+            // Get the most accurate IP address possible
+            let clientIP = 'unknown';
+            if (req.headers['x-forwarded-for']) {
+              clientIP = (req.headers['x-forwarded-for'] as string).split(',')[0].trim();
+            } else if (req.headers['x-real-ip']) {
+              clientIP = req.headers['x-real-ip'] as string;
+            } else if (req.connection && req.connection.remoteAddress) {
+              clientIP = req.connection.remoteAddress;
+            } else if (req.socket && req.socket.remoteAddress) {
+              clientIP = req.socket.remoteAddress;
+            }
+
             const { error: logError } = await supabaseAdmin
               .from('admin_logins')
               .insert([{
                 location: locationString,
-                ip_address: req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'unknown',
+                ip_address: clientIP,
                 user_agent: req.headers['user-agent'] || 'unknown'
               }]);
             
