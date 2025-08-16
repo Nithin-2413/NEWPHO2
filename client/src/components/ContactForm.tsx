@@ -184,14 +184,7 @@ const ContactForm = () => {
             </div>
           </div>
 
-          <div className="p-6 bg-muted/50 rounded-lg">
-            <h4 className="font-semibold mb-2 text-primary">Delivery Information</h4>
-            <p className="text-sm text-muted-foreground">
-              • Delivery all over India<br />
-              • Timeline: 10-15 days<br />
-              • Contact: onaamikasadguru@gmail.com
-            </p>
-          </div>
+          
 
           <Button type="submit" className="sparkle-button w-full h-14 text-lg bg-gradient-to-r from-primary to-purple-600">
             <div className="star-1">⭐</div>
