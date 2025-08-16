@@ -40,7 +40,7 @@ const CEOSection = () => {
               <img
                 src="https://res.cloudinary.com/dwmybitme/image/upload/v1755338743/1001541430-removebg-preview_yll5d7.png"
                 alt="Onaamika Sadguru"
-                className="ceo-image w-80 h-80 object-cover rounded-full"
+                className="ceo-image w-80 h-80 object-contain"
               />
             </div>
           </div>
