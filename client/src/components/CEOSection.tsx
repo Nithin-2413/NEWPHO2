@@ -72,7 +72,7 @@ const CEOSection = () => {
             </div>
 
             <div className="grid grid-cols-2 gap-6 mt-8">
-              <Card className="sparkle-button group hover:shadow-lg transition-all duration-300 border-0 bg-gradient-to-br from-pink-50/30 to-purple-50/30 rounded-2xl">
+              <Card className="sparkle-button glass-premium group hover:shadow-lg transition-all duration-300 border-0 rounded-2xl">
                 <div className="star-1">⭐</div>
                 <div className="star-2">✨</div>
                 <div className="star-3">❤️</div>
@@ -90,7 +90,7 @@ const CEOSection = () => {
                 </CardContent>
               </Card>
               
-              <Card className="sparkle-button group hover:shadow-lg transition-all duration-300 border-0 bg-gradient-to-br from-yellow-50/30 to-orange-50/30 rounded-2xl">
+              <Card className="sparkle-button glass-premium group hover:shadow-lg transition-all duration-300 border-0 rounded-2xl">
                 <div className="star-1">⭐</div>
                 <div className="star-2">✨</div>
                 <div className="star-3">❤️</div>

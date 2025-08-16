@@ -370,50 +370,26 @@ const Index = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="sparkle-button group hover:shadow-2xl transition-all duration-700 border-0 bg-gradient-to-br from-background to-muted/30 hover:-translate-y-2">
-              <div className="star-1">⭐</div>
-              <div className="star-2">✨</div>
-              <div className="star-3">❤️</div>
-              <div className="star-4">🎁</div>
-              <div className="star-5">⭐</div>
-              <div className="star-6">✨</div>
-              <div className="star-7">❤️</div>
-              <div className="star-8">🎁</div>
+            <Card className="group hover:shadow-2xl transition-all duration-700 border-0 bg-gradient-to-br from-background to-muted/30 hover:-translate-y-2">
               <CardContent className="p-8 text-center">
                 <Heart className="h-12 w-12 mx-auto mb-6 text-muted-foreground group-hover:text-red-500 group-hover:scale-110 transition-all duration-500" />
-                <h3 className="text-2xl font-semibold mb-4">Heartfelt Connection</h3>
+                <h3 className="text-2xl font-semibold mb-4 transition-all duration-700 group-hover:bg-gradient-to-r group-hover:from-primary group-hover:via-purple-600 group-hover:to-pink-600 group-hover:bg-clip-text group-hover:text-transparent">Heartfelt Connection</h3>
                 <p className="text-muted-foreground">Every message is crafted to create genuine emotional connections that last forever.</p>
               </CardContent>
             </Card>
 
-            <Card className="sparkle-button group hover:shadow-2xl transition-all duration-700 border-0 bg-gradient-to-br from-background to-muted/30 hover:-translate-y-2">
-              <div className="star-1">⭐</div>
-              <div className="star-2">✨</div>
-              <div className="star-3">❤️</div>
-              <div className="star-4">🎁</div>
-              <div className="star-5">⭐</div>
-              <div className="star-6">✨</div>
-              <div className="star-7">❤️</div>
-              <div className="star-8">🎁</div>
+            <Card className="group hover:shadow-2xl transition-all duration-700 border-0 bg-gradient-to-br from-background to-muted/30 hover:-translate-y-2">
               <CardContent className="p-8 text-center">
                 <Mail className="h-12 w-12 mx-auto mb-6 text-muted-foreground group-hover:text-blue-500 group-hover:scale-110 transition-all duration-500" />
-                <h3 className="text-2xl font-semibold mb-4">Beautiful Presentation</h3>
+                <h3 className="text-2xl font-semibold mb-4 transition-all duration-700 group-hover:bg-gradient-to-r group-hover:from-primary group-hover:via-purple-600 group-hover:to-pink-600 group-hover:bg-clip-text group-hover:text-transparent">Beautiful Presentation</h3>
                 <p className="text-muted-foreground">Each letter is elegantly designed and presented to make the moment truly special.</p>
               </CardContent>
             </Card>
 
-            <Card className="sparkle-button group hover:shadow-2xl transition-all duration-700 border-0 bg-gradient-to-br from-background to-muted/30 hover:-translate-y-2">
-              <div className="star-1">⭐</div>
-              <div className="star-2">✨</div>
-              <div className="star-3">❤️</div>
-              <div className="star-4">🎁</div>
-              <div className="star-5">⭐</div>
-              <div className="star-6">✨</div>
-              <div className="star-7">❤️</div>
-              <div className="star-8">🎁</div>
+            <Card className="group hover:shadow-2xl transition-all duration-700 border-0 bg-gradient-to-br from-background to-muted/30 hover:-translate-y-2">
               <CardContent className="p-8 text-center">
                 <Users className="h-12 w-12 mx-auto mb-6 text-muted-foreground group-hover:text-green-500 group-hover:scale-110 transition-all duration-500" />
-                <h3 className="text-2xl font-semibold mb-4">Personal Touch</h3>
+                <h3 className="text-2xl font-semibold mb-4 transition-all duration-700 group-hover:bg-gradient-to-r group-hover:from-primary group-hover:via-purple-600 group-hover:to-pink-600 group-hover:bg-clip-text group-hover:text-transparent">Personal Touch</h3>
                 <p className="text-muted-foreground">Every word is chosen carefully to reflect your unique voice and emotions.</p>
               </CardContent>
             </Card>
@@ -584,7 +560,7 @@ const Index = () => {
                     <item.icon className="w-8 h-8 mx-auto text-muted-foreground group-hover:text-primary transition-colors duration-300" />
                   </div>
                   
-                  <h3 className="text-xl font-semibold mb-4 group-hover:text-primary transition-colors duration-300">{item.title}</h3>
+                  <h3 className="text-xl font-semibold mb-4 transition-all duration-700 group-hover:bg-gradient-to-r group-hover:from-primary group-hover:via-purple-600 group-hover:to-pink-600 group-hover:bg-clip-text group-hover:text-transparent">{item.title}</h3>
                   <p className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">{item.desc}</p>
                 </div>
               </div>
@@ -644,8 +620,8 @@ const Index = () => {
             </p>
             <p className="text-lg text-muted-foreground">
               Questions? Reach us at{" "}
-              <a href="mailto:onaamikasadguru@gmail.com" className="text-primary hover:underline transition-all duration-300">
-                onaamikasadguru@gmail.com
+              <a href="mailto:thewrittenhug@gmail.com" className="text-primary hover:underline transition-all duration-300">
+                thewrittenhug@gmail.com
               </a>
             </p>
           </div>
@@ -666,7 +642,7 @@ const Index = () => {
           <div className="flex justify-center space-x-8 text-sm text-muted-foreground">
             <span>Made with ❤️ in India</span>
             <span>•</span>
-            <a href="mailto:onaamikasadguru@gmail.com" className="hover:text-primary transition-colors duration-300">
+            <a href="mailto:thewrittenhug@gmail.com" className="hover:text-primary transition-colors duration-300">
               Contact Us
             </a>
             <span>•</span>
