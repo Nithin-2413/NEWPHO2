@@ -309,34 +309,34 @@
   z-index: 1;
   pointer-events: none;
   background: 
-    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.04) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, rgba(167, 139, 250, 0.02) 0%, transparent 50%),
-    linear-gradient(135deg, rgba(79, 172, 254, 0.02) 0%, rgba(255, 110, 199, 0.02) 50%, rgba(139, 92, 246, 0.01) 100%);
+    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(167, 139, 250, 0.05) 0%, transparent 50%),
+    linear-gradient(135deg, rgba(79, 172, 254, 0.04) 0%, rgba(255, 110, 199, 0.04) 50%, rgba(139, 92, 246, 0.03) 100%);
   animation: cosmicFlow 60s ease-in-out infinite;
 }
 
 @keyframes cosmicFlow {
   0%, 100% {
     background: 
-      radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.04) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.03) 0%, transparent 50%),
-      radial-gradient(circle at 40% 40%, rgba(167, 139, 250, 0.02) 0%, transparent 50%),
-      linear-gradient(135deg, rgba(79, 172, 254, 0.02) 0%, rgba(255, 110, 199, 0.02) 50%, rgba(139, 92, 246, 0.01) 100%);
+      radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.06) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(167, 139, 250, 0.05) 0%, transparent 50%),
+      linear-gradient(135deg, rgba(79, 172, 254, 0.04) 0%, rgba(255, 110, 199, 0.04) 50%, rgba(139, 92, 246, 0.03) 100%);
   }
   33% {
     background: 
-      radial-gradient(circle at 70% 30%, rgba(120, 119, 198, 0.03) 0%, transparent 50%),
-      radial-gradient(circle at 30% 70%, rgba(255, 119, 198, 0.04) 0%, transparent 50%),
-      radial-gradient(circle at 60% 10%, rgba(167, 139, 250, 0.03) 0%, transparent 50%),
-      linear-gradient(225deg, rgba(139, 92, 246, 0.01) 0%, rgba(79, 172, 254, 0.02) 50%, rgba(255, 110, 199, 0.01) 100%);
+      radial-gradient(circle at 70% 30%, rgba(120, 119, 198, 0.06) 0%, transparent 50%),
+      radial-gradient(circle at 30% 70%, rgba(255, 119, 198, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 60% 10%, rgba(167, 139, 250, 0.06) 0%, transparent 50%),
+      linear-gradient(225deg, rgba(139, 92, 246, 0.03) 0%, rgba(79, 172, 254, 0.04) 50%, rgba(255, 110, 199, 0.03) 100%);
   }
   66% {
     background: 
-      radial-gradient(circle at 90% 90%, rgba(120, 119, 198, 0.03) 0%, transparent 50%),
-      radial-gradient(circle at 10% 10%, rgba(255, 119, 198, 0.05) 0%, transparent 50%),
-      radial-gradient(circle at 50% 80%, rgba(167, 139, 250, 0.02) 0%, transparent 50%),
-      linear-gradient(315deg, rgba(255, 110, 199, 0.01) 0%, rgba(139, 92, 246, 0.02) 50%, rgba(79, 172, 254, 0.02) 100%);
+      radial-gradient(circle at 90% 90%, rgba(120, 119, 198, 0.06) 0%, transparent 50%),
+      radial-gradient(circle at 10% 10%, rgba(255, 119, 198, 0.09) 0%, transparent 50%),
+      radial-gradient(circle at 50% 80%, rgba(167, 139, 250, 0.04) 0%, transparent 50%),
+      linear-gradient(315deg, rgba(255, 110, 199, 0.03) 0%, rgba(139, 92, 246, 0.04) 50%, rgba(79, 172, 254, 0.04) 100%);
   }
 }
 
