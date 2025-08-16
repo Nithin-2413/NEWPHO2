@@ -40,7 +40,7 @@ const CEOSection = () => {
               <img
                 src="https://res.cloudinary.com/dwmybitme/image/upload/v1755338743/1001541430-removebg-preview_yll5d7.png"
                 alt="Onaamika Sadguru"
-                className="ceo-image w-80 h-80 object-cover rounded-full border-4 border-primary/20"
+                className="ceo-image w-80 h-80 object-cover rounded-full"
               />
             </div>
           </div>
@@ -72,7 +72,15 @@ const CEOSection = () => {
             </div>
 
             <div className="grid grid-cols-2 gap-6 mt-8">
-              <Card className="group hover:shadow-lg transition-all duration-300 border-0 bg-gradient-to-br from-pink-50/30 to-purple-50/30 rounded-2xl">
+              <Card className="sparkle-button group hover:shadow-lg transition-all duration-300 border-0 bg-gradient-to-br from-pink-50/30 to-purple-50/30 rounded-2xl">
+                <div className="star-1">⭐</div>
+                <div className="star-2">✨</div>
+                <div className="star-3">❤️</div>
+                <div className="star-4">🎁</div>
+                <div className="star-5">⭐</div>
+                <div className="star-6">✨</div>
+                <div className="star-7">❤️</div>
+                <div className="star-8">🎁</div>
                 <CardContent className="p-6 text-center">
                   <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-r from-pink-400 to-purple-400 rounded-full flex items-center justify-center">
                     <Heart className="w-6 h-6 text-white fill-current" />
@@ -82,7 +90,15 @@ const CEOSection = () => {
                 </CardContent>
               </Card>
               
-              <Card className="group hover:shadow-lg transition-all duration-300 border-0 bg-gradient-to-br from-yellow-50/30 to-orange-50/30 rounded-2xl">
+              <Card className="sparkle-button group hover:shadow-lg transition-all duration-300 border-0 bg-gradient-to-br from-yellow-50/30 to-orange-50/30 rounded-2xl">
+                <div className="star-1">⭐</div>
+                <div className="star-2">✨</div>
+                <div className="star-3">❤️</div>
+                <div className="star-4">🎁</div>
+                <div className="star-5">⭐</div>
+                <div className="star-6">✨</div>
+                <div className="star-7">❤️</div>
+                <div className="star-8">🎁</div>
                 <CardContent className="p-6 text-center">
                   <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center">
                     <Sparkles className="w-6 h-6 text-white" />
