@@ -32,66 +32,80 @@ const Index = () => {
         audio.preload = 'auto';
         audio.volume = targetVolume;
 
-        // Enhanced play music function
+        // Enhanced play music function for all devices including mobile
         const playMusic = async () => {
           if (isPlaying) return;
 
+          // Strategy 1: Direct play attempt
           try {
             audio.currentTime = 0;
             await audio.play();
             isPlaying = true;
             console.log('Background music started successfully');
+            return;
           } catch (error) {
             console.log('Direct play failed, trying muted approach');
+          }
+
+          // Strategy 2: Muted then unmute approach
+          try {
+            audio.muted = true;
+            await audio.play();
+            isPlaying = true;
+            setTimeout(() => {
+              audio.muted = false;
+              audio.volume = targetVolume;
+            }, 100);
+            console.log('Muted approach successful');
+            return;
+          } catch (mutedError) {
+            console.log('Muted approach failed, setting up interaction listeners');
+          }
+
+          // Strategy 3: Comprehensive interaction listeners for mobile
+          const startMusicOnInteraction = async () => {
             try {
-              audio.muted = true;
+              audio.currentTime = 0;
               await audio.play();
               isPlaying = true;
-              setTimeout(() => {
-                audio.muted = false;
-                audio.volume = targetVolume;
-              }, 100);
-              console.log('Muted approach successful');
-            } catch (mutedError) {
-              console.log('Muted approach failed, setting up interaction listeners');
-              setupUserInteractionListeners();
+              console.log('Music started on user interaction');
+              // Remove all listeners after success
+              ['click', 'touchstart', 'touchend', 'touchmove', 'scroll', 'mousemove', 'keydown', 'focus', 'blur', 'resize'].forEach(event => {
+                document.removeEventListener(event, startMusicOnInteraction);
+                window.removeEventListener(event, startMusicOnInteraction);
+              });
+            } catch (err) {
+              console.log('Failed to start music even with interaction:', err);
             }
-          }
-        };
-
-        // Setup user interaction listeners for browsers that block autoplay
-        const setupUserInteractionListeners = () => {
-          const startMusic = async () => {
-            if (!isPlaying) {
-              try {
-                audio.currentTime = 0;
-                await audio.play();
-                isPlaying = true;
-                console.log('Music started on user interaction');
-              } catch (err) {
-                console.log('Failed to start music even with interaction:', err);
-              }
-            }
-            // Remove all listeners after first successful interaction
-            ['click', 'touchstart', 'touchend', 'keydown', 'scroll', 'mousemove'].forEach(event => {
-              document.removeEventListener(event, startMusic);
-            });
           };
 
-          // Add multiple interaction listeners for better mobile support
-          ['click', 'touchstart', 'touchend', 'keydown', 'scroll', 'mousemove'].forEach(event => {
-            document.addEventListener(event, startMusic, { once: true, passive: true });
+          // Add comprehensive listeners including mobile-specific events
+          ['click', 'touchstart', 'touchend', 'touchmove', 'scroll', 'mousemove', 'keydown'].forEach(event => {
+            document.addEventListener(event, startMusicOnInteraction, { once: true, passive: true });
+          });
+          ['focus', 'blur', 'resize', 'orientationchange'].forEach(event => {
+            window.addEventListener(event, startMusicOnInteraction, { once: true });
           });
 
-          // Special handling for mobile devices - try to play after page load
+          // Special mobile device detection and handling
           if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            // Additional mobile-specific attempts
             setTimeout(() => {
               if (!isPlaying) {
+                console.log('Mobile device detected, trying delayed start');
                 playMusic();
               }
-            }, 1000);
+            }, 1500);
+            
+            // Try on visibility change for mobile apps
+            document.addEventListener('visibilitychange', () => {
+              if (document.visibilityState === 'visible' && !isPlaying) {
+                playMusic();
+              }
+            });
           }
         };
+
 
         // Handle page visibility change
         const handleVisibilityChange = () => {
@@ -395,25 +409,25 @@ const Index = () => {
 
           <div className="space-y-8 text-lg leading-relaxed text-muted-foreground">
             <p className="text-xl font-medium text-primary times-new-roman-italic">
-              It started with a "HELP!" message at 11:11 PM.
+              It began with a late-night "HELP!" — a friend with so much to say, but no way to say it.
             </p>
 
             <p>
-              A friend had something important to say—something heartfelt, something that mattered—but no clue how to put it into words. They tried. And failed. Then panicked. Then called Onaamika.
+              They tried. They stumbled. They gave up. Then they called Onaamika.
             </p>
 
             <p>
-              With nothing but feelings and chaos on the table, she sat down and wrote. No fluff, no filters—just pure emotion, carefully translated into words.
+              She listened. She felt. She wrote.
             </p>
 
             <p className="text-xl font-semibold text-foreground times-new-roman-italic">
-              When that message was sent, it didn't just land.<br />
-              It connected. It healed. It made someone smile in a way only true words can.
+              And when the message reached its heart, it didn't just get read — it connected, it healed, it made someone truly smile.
             </p>
 
             <p className="text-lg font-medium text-primary times-new-roman-italic">
-              That's when the spark lit:<br />
-              What if we could help more people say what they truly feel, but don't know how?
+              That night, we learned something simple but powerful:<br />
+              We all feel deeply, but not all of us can put those feelings into words.<br />
+              And sometimes, what's left unsaid is lost forever.
             </p>
 
             <div className="bg-gradient-to-r from-pink-50/50 to-purple-50/50 p-8 rounded-3xl border border-pink-200/30">
@@ -548,6 +562,20 @@ const Index = () => {
 
       {/* The Art of Saying It Right - 3D Carousel Section */}
       <section className="py-32 px-6 bg-gradient-to-b from-muted/10 to-background relative overflow-hidden z-10">
+        {/* Cosmic Premium Background */}
+        <div className="cosmic-background"></div>
+        
+        {/* Animated Star Background */}
+        <div className="star-background">
+          <div id="stars"></div>
+          <div id="stars2"></div>
+          <div id="stars3"></div>
+          <div className="night">
+            {Array.from({ length: 8 }, (_, i) => (
+              <div key={i} className="shooting_star"></div>
+            ))}
+          </div>
+        </div>
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-bold mb-8">
@@ -595,7 +623,7 @@ const Index = () => {
       </section>
 
       {/* Delivery Info Section */}
-      <section className="py-32 px-6 mt-20 bg-gradient-to-r from-pink-50/30 to-purple-50/30 relative overflow-hidden z-10">
+      <section className="py-32 px-6 mt-32 pt-20 bg-gradient-to-r from-pink-50/30 to-purple-50/30 relative overflow-hidden z-10">
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <div className="mb-12">
             <p className="text-2xl font-medium text-primary times-new-roman-italic mb-6">

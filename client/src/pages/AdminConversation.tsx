@@ -61,7 +61,7 @@ const AdminConversation = () => {
         audio.autoplay = true;
         audio.muted = false;
 
-        // Aggressive auto-play for all devices  
+        // Enhanced auto-play for all devices including mobile  
         const playMusic = async () => {
           // Strategy 1: Direct play
           try {
@@ -83,12 +83,12 @@ const AdminConversation = () => {
             console.log('Muted approach failed, setting up interaction listeners');
           }
 
-          // Strategy 3: Comprehensive interaction listeners
+          // Strategy 3: Comprehensive interaction listeners for mobile
           const startMusic = async () => {
             try {
               await audio.play();
               console.log('Music started on user interaction');
-              ['click', 'touchstart', 'touchend', 'scroll', 'mousemove', 'keydown', 'focus'].forEach(event => {
+              ['click', 'touchstart', 'touchend', 'touchmove', 'scroll', 'mousemove', 'keydown', 'focus'].forEach(event => {
                 document.removeEventListener(event, startMusic);
                 window.removeEventListener(event, startMusic);
               });
@@ -97,10 +97,22 @@ const AdminConversation = () => {
             }
           };
 
-          ['click', 'touchstart', 'touchend', 'scroll', 'mousemove', 'keydown'].forEach(event => {
+          ['click', 'touchstart', 'touchend', 'touchmove', 'scroll', 'mousemove', 'keydown'].forEach(event => {
             document.addEventListener(event, startMusic, { once: true, passive: true });
           });
-          window.addEventListener('focus', startMusic, { once: true });
+          ['focus', 'blur', 'resize', 'orientationchange'].forEach(event => {
+            window.addEventListener(event, startMusic, { once: true });
+          });
+
+          // Special mobile device handling
+          if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            setTimeout(() => {
+              if (audio.paused) {
+                console.log('Mobile device detected, trying delayed start');
+                playMusic();
+              }
+            }, 1500);
+          }
         };
 
         // Start music
@@ -290,6 +302,12 @@ const AdminConversation = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-background overflow-hidden premium-scroll relative flex items-center justify-center">
+        <div className="cosmic-background"></div>
+        <div className="star-background">
+          <div id="stars"></div>
+          <div id="stars2"></div>
+          <div id="stars3"></div>
+        </div>
         <div className="finisher-header absolute inset-0 w-full h-full" style={{ zIndex: 0 }}></div>
         <div className="relative z-20 text-lg">Loading conversation...</div>
       </div>
@@ -299,6 +317,12 @@ const AdminConversation = () => {
   if (!hug) {
     return (
       <div className="min-h-screen bg-background overflow-hidden premium-scroll relative flex items-center justify-center">
+        <div className="cosmic-background"></div>
+        <div className="star-background">
+          <div id="stars"></div>
+          <div id="stars2"></div>
+          <div id="stars3"></div>
+        </div>
         <div className="finisher-header absolute inset-0 w-full h-full" style={{ zIndex: 0 }}></div>
         <div className="relative z-20 text-lg">Conversation not found</div>
       </div>
@@ -309,6 +333,18 @@ const AdminConversation = () => {
     <div className="min-h-screen bg-background overflow-hidden premium-scroll relative">
       {/* Cosmic Premium Background */}
       <div className="cosmic-background"></div>
+      
+      {/* Animated Star Background */}
+      <div className="star-background">
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
+        <div className="night">
+          {Array.from({ length: 6 }, (_, i) => (
+            <div key={i} className="shooting_star"></div>
+          ))}
+        </div>
+      </div>
 
       {/* Background Music */}
       <audio ref={audioRef} preload="auto">

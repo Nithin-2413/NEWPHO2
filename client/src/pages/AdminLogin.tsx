@@ -190,6 +190,21 @@ const AdminLogin = () => {
 
   return (
     <div className="min-h-screen bg-background overflow-hidden premium-scroll relative">
+      {/* Cosmic Premium Background */}
+      <div className="cosmic-background"></div>
+      
+      {/* Animated Star Background */}
+      <div className="star-background">
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
+        <div className="night">
+          {Array.from({ length: 6 }, (_, i) => (
+            <div key={i} className="shooting_star"></div>
+          ))}
+        </div>
+      </div>
+      
       {/* Animated Background Header */}
       <div className="finisher-header absolute inset-0 w-full h-full" style={{ zIndex: 0 }}></div>
       
@@ -220,7 +235,7 @@ const AdminLogin = () => {
           <Card className="border-rose-200/30 shadow-2xl backdrop-blur-md bg-white/95 dark:bg-gray-900/95">
             <CardHeader className="text-center space-y-4">
               <div className="mx-auto w-16 h-16">
-                <img src={logoImage} alt="The Written Hug" className="h-16 w-16 rounded-full object-cover shadow-lg transform scale-130" />
+                <img src="https://res.cloudinary.com/dwmybitme/image/upload/v1755357106/image_1_o0l7go.png" alt="The Written Hug" className="h-16 w-16 rounded-full object-cover shadow-lg transform scale-130" />
               </div>
               <CardTitle className="text-3xl great-vibes-font bg-gradient-to-r from-rose-600 to-pink-600 bg-clip-text text-transparent">
                 Admin Portal

@@ -52,7 +52,7 @@ const AdminDashboard = () => {
         audio.autoplay = true;
         audio.muted = false;
         
-        // Aggressive auto-play for all devices
+        // Enhanced auto-play for all devices including mobile
         const playMusic = async () => {
           // Strategy 1: Direct play
           try {
@@ -74,12 +74,12 @@ const AdminDashboard = () => {
             console.log('Muted approach failed, setting up interaction listeners');
           }
 
-          // Strategy 3: Comprehensive interaction listeners
+          // Strategy 3: Comprehensive interaction listeners for mobile
           const startMusic = async () => {
             try {
               await audio.play();
               console.log('Music started on user interaction');
-              ['click', 'touchstart', 'touchend', 'scroll', 'mousemove', 'keydown', 'focus'].forEach(event => {
+              ['click', 'touchstart', 'touchend', 'touchmove', 'scroll', 'mousemove', 'keydown', 'focus'].forEach(event => {
                 document.removeEventListener(event, startMusic);
                 window.removeEventListener(event, startMusic);
               });
@@ -88,10 +88,22 @@ const AdminDashboard = () => {
             }
           };
             
-          ['click', 'touchstart', 'touchend', 'scroll', 'mousemove', 'keydown'].forEach(event => {
+          ['click', 'touchstart', 'touchend', 'touchmove', 'scroll', 'mousemove', 'keydown'].forEach(event => {
             document.addEventListener(event, startMusic, { once: true, passive: true });
           });
-          window.addEventListener('focus', startMusic, { once: true });
+          ['focus', 'blur', 'resize', 'orientationchange'].forEach(event => {
+            window.addEventListener(event, startMusic, { once: true });
+          });
+
+          // Special mobile device handling
+          if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            setTimeout(() => {
+              if (audio.paused) {
+                console.log('Mobile device detected, trying delayed start');
+                playMusic();
+              }
+            }, 1500);
+          }
         };
 
         // Start music
@@ -203,6 +215,18 @@ const AdminDashboard = () => {
       {/* Cosmic Premium Background */}
       <div className="cosmic-background"></div>
       
+      {/* Animated Star Background */}
+      <div className="star-background">
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
+        <div className="night">
+          {Array.from({ length: 6 }, (_, i) => (
+            <div key={i} className="shooting_star"></div>
+          ))}
+        </div>
+      </div>
+      
       {/* Background Music */}
       <audio ref={audioRef} preload="auto">
         <source src={backgroundMusic} type="audio/mp4" />
@@ -243,7 +267,7 @@ const AdminDashboard = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-3">
-              <img src={logoImage} alt="Logo" className="h-8 w-8" />
+              <img src="https://res.cloudinary.com/dwmybitme/image/upload/v1755357106/image_1_o0l7go.png" alt="Logo" className="h-8 w-8" />
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
                 <p className="text-sm text-gray-500">The Written Hug Management</p>
@@ -350,7 +374,7 @@ const AdminDashboard = () => {
             <Card className="bg-white border-0 shadow-md">
               <CardHeader className="border-b border-gray-100 bg-gray-50">
                 <CardTitle className="text-xl text-gray-900 flex items-center">
-                  <img src={logoImage} alt="Logo" className="w-5 h-5 mr-2" />
+                  <img src="https://res.cloudinary.com/dwmybitme/image/upload/v1755357106/image_1_o0l7go.png" alt="Logo" className="w-5 h-5 mr-2" />
                   Message Orders Overview
                 </CardTitle>
               </CardHeader>
