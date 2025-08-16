@@ -10,14 +10,13 @@ import TypingAnimation from '@/components/TypingAnimation';
 import FAQSection from '@/components/FAQSection';
 import WhyWeExistSection from '@/components/WhyWeExistSection';
 import StillNotSureSection from '@/components/StillNotSureSection';
-import backgroundMusic from '@assets/WhatsApp Audio 2025-08-15 at 12.09.54 AM_1755197391594.mp4';
+const backgroundMusic = 'https://res.cloudinary.com/dwmybitme/video/upload/v1755353394/WhatsApp_Audio_2025-08-15_at_12.09.54_AM_fn8je9.m4a';
 
 const Index = () => {
   const [scrollY, setScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
-  const fadeDuration = 1000; // 1 second fade time
-  const targetVolume = 0.10; // 10% volume
+  const targetVolume = 0.32; // 32% volume
   let isPlaying = false;
 
   useEffect(() => {
@@ -25,93 +24,53 @@ const Index = () => {
     window.addEventListener('scroll', handleScroll);
     setIsVisible(true);
 
-    // Setup background music with auto-play and fade effects
+    // Setup background music with auto-play
     const setupBackgroundMusic = () => {
       if (audioRef.current) {
         const audio = audioRef.current;
         audio.loop = true;
         audio.preload = 'auto';
+        audio.volume = targetVolume;
 
-        // Smooth fade out function
-        const fadeOut = (duration = fadeDuration) => {
-          const startVolume = audio.volume;
-          const steps = 60; // 60 steps for smooth fade
-          const volumeStep = startVolume / steps;
-          const timeStep = duration / steps;
-
-          const fadeInterval = setInterval(() => {
-            if (audio.volume > 0) {
-              audio.volume = Math.max(audio.volume - volumeStep, 0);
-            } else {
-              audio.pause();
-              clearInterval(fadeInterval);
-              isPlaying = false;
-            }
-          }, timeStep);
-        };
-
-        // Smooth fade in function
-        const fadeIn = (duration = fadeDuration) => {
-          audio.volume = 0;
-          const steps = 60;
-          const volumeStep = targetVolume / steps;
-          const timeStep = duration / steps;
-
-          const fadeInterval = setInterval(() => {
-            if (audio.volume < targetVolume) {
-              audio.volume = Math.min(audio.volume + volumeStep, targetVolume);
-            } else {
-              clearInterval(fadeInterval);
-              isPlaying = true;
-            }
-          }, timeStep);
-        };
-
-        // Enhanced play music function with fade in
-        const playMusic = (useFadeIn = false) => {
+        // Enhanced play music function
+        const playMusic = async () => {
           if (isPlaying) return;
 
-          const attemptPlay = async () => {
+          try {
+            audio.currentTime = 0;
+            await audio.play();
+            isPlaying = true;
+            console.log('Background music started successfully');
+          } catch (error) {
+            console.log('Direct play failed, trying muted approach');
             try {
-              audio.currentTime = 0;
+              audio.muted = true;
               await audio.play();
               isPlaying = true;
-              if (useFadeIn) {
-                fadeIn(fadeDuration); // 1 second fade in
-              } else {
+              setTimeout(() => {
+                audio.muted = false;
                 audio.volume = targetVolume;
-              }
-              console.log('Background music started successfully');
-            } catch (error) {
-              console.log('Direct play failed, trying muted approach');
-              try {
-                audio.muted = true;
-                await audio.play();
-                isPlaying = true;
-                setTimeout(() => {
-                  audio.muted = false;
-                  if (useFadeIn) {
-                    fadeIn(fadeDuration);
-                  } else {
-                    audio.volume = targetVolume;
-                  }
-                }, 100);
-                console.log('Muted approach successful');
-              } catch (mutedError) {
-                console.log('Muted approach failed, setting up interaction listeners');
-                setupUserInteractionListeners();
-              }
+              }, 100);
+              console.log('Muted approach successful');
+            } catch (mutedError) {
+              console.log('Muted approach failed, setting up interaction listeners');
+              setupUserInteractionListeners();
             }
-          };
-
-          attemptPlay();
+          }
         };
 
         // Setup user interaction listeners for browsers that block autoplay
         const setupUserInteractionListeners = () => {
-          const startMusic = () => {
+          const startMusic = async () => {
             if (!isPlaying) {
-              playMusic(true);
+              try {
+                audio.currentTime = 0;
+                await audio.play();
+                isPlaying = true;
+                console.log('Music started on user interaction');
+              } catch (err) {
+                console.log('Failed to start music even with interaction:', err);
+              }
             }
             // Remove all listeners after first successful interaction
             ['click', 'touchstart', 'touchend', 'keydown', 'scroll', 'mousemove'].forEach(event => {
@@ -124,28 +83,28 @@ const Index = () => {
             document.addEventListener(event, startMusic, { once: true, passive: true });
           });
 
-          // Special handling for mobile devices
+          // Special handling for mobile devices - try to play after page load
           if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            // Try to play after a short delay on mobile
             setTimeout(() => {
               if (!isPlaying) {
-                playMusic(true);
+                playMusic();
               }
             }, 1000);
           }
         };
 
-        // Handle page visibility change with fade out/in
+        // Handle page visibility change
         const handleVisibilityChange = () => {
-          if (document.visibilityState === 'visible') {
-            playMusic(true); // Use fade in
-          } else {
-            fadeOut(fadeDuration); // 3 second fade out
+          if (document.visibilityState === 'visible' && !isPlaying) {
+            playMusic();
+          } else if (document.visibilityState === 'hidden' && isPlaying) {
+            audio.pause();
+            isPlaying = false;
           }
         };
 
         // Start music immediately
-        playMusic(true);
+        playMusic();
 
         document.addEventListener('visibilitychange', handleVisibilityChange);
 
@@ -222,6 +181,7 @@ const Index = () => {
 
       {/* Background Music */}
       <audio ref={audioRef} preload="auto">
+        <source src={backgroundMusic} type="audio/mp4" />
         <source src={backgroundMusic} type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>

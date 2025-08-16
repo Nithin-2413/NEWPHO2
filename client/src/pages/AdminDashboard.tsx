@@ -9,7 +9,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Eye, Search, Filter, Calendar, User, Mail, Phone, MessageSquare, BarChart3, Users, TrendingUp, Clock, Globe, Heart } from 'lucide-react';
 import logoImage from '@assets/Untitled design (2)_1755165830517.png';
 import { useLocation } from 'wouter';
-import backgroundMusic from '@assets/WhatsApp Audio 2025-08-15 at 12.09.54 AM_1755197391594.mp4';
+const backgroundMusic = 'https://res.cloudinary.com/dwmybitme/video/upload/v1755353394/WhatsApp_Audio_2025-08-15_at_12.09.54_AM_fn8je9.m4a';
 
 interface Hug {
   id: string;
@@ -46,7 +46,7 @@ const AdminDashboard = () => {
     const setupBackgroundMusic = () => {
       if (audioRef.current) {
         const audio = audioRef.current;
-        audio.volume = 0.10;
+        audio.volume = 0.32;
         audio.loop = true;
         audio.preload = 'auto';
         audio.autoplay = true;
@@ -205,7 +205,9 @@ const AdminDashboard = () => {
       
       {/* Background Music */}
       <audio ref={audioRef} preload="auto">
+        <source src={backgroundMusic} type="audio/mp4" />
         <source src={backgroundMusic} type="audio/mpeg" />
+        Your browser does not support the audio element.
       </audio>
       {/* Background Floating Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">

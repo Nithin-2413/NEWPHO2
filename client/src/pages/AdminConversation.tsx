@@ -55,12 +55,12 @@ const AdminConversation = () => {
     const setupBackgroundMusic = () => {
       if (audioRef.current) {
         const audio = audioRef.current;
-        audio.volume = 0.10;
+        audio.volume = 0.32;
         audio.loop = true;
         audio.preload = 'auto';
         audio.autoplay = true;
         audio.muted = false;
-        
+
         // Aggressive auto-play for all devices  
         const playMusic = async () => {
           // Strategy 1: Direct play
@@ -96,7 +96,7 @@ const AdminConversation = () => {
               console.log('Failed to start music even with interaction:', err);
             }
           };
-            
+
           ['click', 'touchstart', 'touchend', 'scroll', 'mousemove', 'keydown'].forEach(event => {
             document.addEventListener(event, startMusic, { once: true, passive: true });
           });
@@ -181,7 +181,7 @@ const AdminConversation = () => {
     try {
       const response = await fetch(`/api/getConversation?hugid=${id}`);
       const result = await response.json();
-      
+
       if (result.success) {
         setHug(result.hug);
         setReplies(result.replies);
@@ -221,7 +221,7 @@ const AdminConversation = () => {
       });
 
       const result = await response.json();
-      
+
       if (result.success) {
         // Add the new reply to the UI immediately
         const newReply: Reply = {
@@ -235,7 +235,7 @@ const AdminConversation = () => {
         };
         setReplies([...replies, newReply]);
         setReplyMessage('');
-        
+
         toast({
           title: "Reply Sent",
           description: "Your reply has been sent to the client via email",
@@ -271,7 +271,7 @@ const AdminConversation = () => {
       });
 
       const result = await response.json();
-      
+
       if (result.success) {
         // Update the reply in the UI
         setReplies(replies.map(reply => 
@@ -309,15 +309,15 @@ const AdminConversation = () => {
     <div className="min-h-screen bg-background overflow-hidden premium-scroll relative">
       {/* Cosmic Premium Background */}
       <div className="cosmic-background"></div>
-      
+
       {/* Background Music */}
       <audio ref={audioRef} preload="auto">
         <source src={backgroundMusic} type="audio/mpeg" />
       </audio>
-      
+
       {/* Animated Background Header */}
       <div className="finisher-header absolute inset-0 w-full h-full" style={{ zIndex: 0 }}></div>
-      
+
       {/* Enhanced Floating Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-10">
         <div className="absolute top-32 left-16 animate-float opacity-15">
@@ -437,7 +437,7 @@ const AdminConversation = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className="space-y-4">
               <div className="p-4 bg-gradient-to-r from-rose-50 to-pink-50 rounded-lg border border-rose-200">
                 <Label className="text-sm font-medium text-rose-700 mb-2 block">Feelings</Label>
@@ -496,7 +496,7 @@ const AdminConversation = () => {
                           <span className="text-white text-xs font-bold">!</span>
                         </div>
                       )}
-                      
+
                       <div className={`text-sm font-medium mb-2 flex items-center gap-2 ${
                         reply.sender_type === 'admin' ? 'text-rose-100' : 'text-gray-600'
                       }`}>
@@ -508,7 +508,7 @@ const AdminConversation = () => {
                         }`}>
                           {reply.sender_type}
                         </span>
-                        
+
                         {/* Email status indicator */}
                         {reply.sender_type === 'admin' && reply.email_sent && (
                           <span className="flex items-center gap-1 px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs">
@@ -516,7 +516,7 @@ const AdminConversation = () => {
                             Sent
                           </span>
                         )}
-                        
+
                         {reply.sender_type === 'client' && (
                           <span className="flex items-center gap-1 px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs">
                             <Mail className="w-3 h-3" />
@@ -524,9 +524,9 @@ const AdminConversation = () => {
                           </span>
                         )}
                       </div>
-                      
+
                       <div className="text-sm leading-relaxed">{reply.message}</div>
-                      
+
                       <div className={`text-xs mt-2 flex items-center justify-between ${
                         reply.sender_type === 'admin' ? 'text-rose-100' : 'text-gray-500'
                       }`}>
@@ -538,7 +538,7 @@ const AdminConversation = () => {
                             minute: '2-digit'
                           })}
                         </span>
-                        
+
                         {reply.sender_type === 'client' && (
                           <span className={`text-xs ${reply.is_read ? 'text-green-600' : 'text-red-600 font-medium'}`}>
                             {reply.is_read ? '✓ Read' : '● Unread'}
