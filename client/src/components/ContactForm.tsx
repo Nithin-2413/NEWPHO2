@@ -193,7 +193,7 @@ const ContactForm = () => {
             </p>
           </div>
 
-          <Button type="submit" className="w-full h-14 text-lg bg-gradient-to-r from-primary to-purple-600">
+          <Button type="submit" className="sparkle-button w-full h-14 text-lg bg-gradient-to-r from-primary to-purple-600">
             <div className="flex items-center gap-3">
               <Send className="h-5 w-5" />
               Send My Story

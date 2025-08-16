@@ -11,7 +11,6 @@ import TypingAnimation from '@/components/TypingAnimation';
 import FAQSection from '@/components/FAQSection';
 import WhyWeExistSection from '@/components/WhyWeExistSection';
 import StillNotSureSection from '@/components/StillNotSureSection';
-import CosmicButtonDemo from '@/components/CosmicButtonDemo';
 import backgroundMusic from '@assets/WhatsApp Audio 2025-08-15 at 12.09.54 AM_1755197391594.mp4';
 
 const Index = () => {
@@ -276,7 +275,7 @@ const Index = () => {
             <a href="#how-it-works" className="text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-105">How It Works</a>
             <a href="#contact" className="text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-105">Contact</a>
           </div>
-          <Button onClick={scrollToContact} className="bg-gradient-to-r from-primary to-purple-600 text-white hover:shadow-xl hover:scale-105 transition-all duration-300">
+          <Button onClick={scrollToContact} className="sparkle-button bg-gradient-to-r from-primary to-purple-600 text-white hover:shadow-xl hover:scale-105 transition-all duration-300">
             Get Started
           </Button>
         </div>
@@ -325,7 +324,7 @@ const Index = () => {
           </p>
           
           <div className="flex justify-center">
-            <Button onClick={scrollToContact} size="lg" className="bg-gradient-to-r from-primary to-purple-600 text-white px-8 py-4 text-lg group hover:scale-105 hover:shadow-2xl transition-all duration-300">
+            <Button onClick={scrollToContact} size="lg" className="sparkle-button bg-gradient-to-r from-primary to-purple-600 text-white px-8 py-4 text-lg group hover:scale-105 hover:shadow-2xl transition-all duration-300">
               Start Your Message
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
@@ -588,25 +587,6 @@ const Index = () => {
 
       {/* Still Not Sure Section */}
       <StillNotSureSection />
-
-      {/* Cosmic Button Demo Section */}
-      <section className="py-32 px-6 relative overflow-hidden z-10">
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Cosmic Button
-              <br />
-              <span className="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-                Examples
-              </span>
-            </h2>
-            <p className="text-xl text-muted-foreground">
-              Beautiful buttons with sparkle and heart hover effects
-            </p>
-          </div>
-          <CosmicButtonDemo />
-        </div>
-      </section>
 
       {/* Contact Section */}
       <section id="contact" className="py-32 px-6 relative overflow-hidden z-10">
