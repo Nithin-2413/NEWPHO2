@@ -11,6 +11,7 @@ import TypingAnimation from '@/components/TypingAnimation';
 import FAQSection from '@/components/FAQSection';
 import WhyWeExistSection from '@/components/WhyWeExistSection';
 import StillNotSureSection from '@/components/StillNotSureSection';
+import CosmicButtonDemo from '@/components/CosmicButtonDemo';
 import backgroundMusic from '@assets/WhatsApp Audio 2025-08-15 at 12.09.54 AM_1755197391594.mp4';
 
 const Index = () => {
@@ -587,6 +588,25 @@ const Index = () => {
 
       {/* Still Not Sure Section */}
       <StillNotSureSection />
+
+      {/* Cosmic Button Demo Section */}
+      <section className="py-32 px-6 relative overflow-hidden z-10">
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Cosmic Button
+              <br />
+              <span className="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+                Examples
+              </span>
+            </h2>
+            <p className="text-xl text-muted-foreground">
+              Beautiful buttons with sparkle and heart hover effects
+            </p>
+          </div>
+          <CosmicButtonDemo />
+        </div>
+      </section>
 
       {/* Contact Section */}
       <section id="contact" className="py-32 px-6 relative overflow-hidden z-10">

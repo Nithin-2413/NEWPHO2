@@ -5,6 +5,71 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Cosmic Button Animations */
+@layer components {
+  .cosmic-button:hover .star-1 {
+    transform: translate(-120%, -200%) rotate(360deg) scale(1.5);
+    filter: drop-shadow(0 0 10px rgba(255, 223, 0, 0.8));
+  }
+  
+  .cosmic-button:hover .star-2 {
+    transform: translate(-80%, 150%) rotate(-180deg) scale(1.3);
+    filter: drop-shadow(0 0 8px rgba(255, 223, 0, 0.7));
+  }
+  
+  .cosmic-button:hover .star-3 {
+    transform: translate(120%, -150%) rotate(270deg) scale(1.4);
+    filter: drop-shadow(0 0 8px rgba(255, 223, 0, 0.7));
+  }
+  
+  .cosmic-button:hover .star-4 {
+    transform: translate(200%, 50%) rotate(180deg) scale(1.2);
+    filter: drop-shadow(0 0 6px rgba(255, 223, 0, 0.6));
+  }
+  
+  .cosmic-button:hover .star-5 {
+    transform: translate(100%, 80%) rotate(-270deg) scale(1.3);
+    filter: drop-shadow(0 0 8px rgba(255, 223, 0, 0.7));
+  }
+  
+  .cosmic-button:hover .heart {
+    transform: translate(-50%, -50%) scale(1.5) rotate(360deg);
+    filter: drop-shadow(0 0 10px rgba(255, 182, 193, 0.5));
+    animation: heartbeat 1.5s ease-in-out infinite;
+  }
+  
+  @keyframes heartbeat {
+    0%, 100% { transform: translate(-50%, -50%) scale(1.5); }
+    50% { transform: translate(-50%, -50%) scale(1.7); }
+  }
+  
+  .cosmic-button {
+    position: relative;
+    overflow: visible;
+  }
+  
+  .cosmic-button::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg, transparent, rgba(255, 223, 0, 0.1), transparent, rgba(255, 182, 193, 0.1), transparent);
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    z-index: -1;
+  }
+  
+  .cosmic-button:hover::before {
+    opacity: 1;
+    animation: shimmer 2s linear infinite;
+  }
+  
+  @keyframes shimmer {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(200%) rotate(45deg); }
+  }
+}
+
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. */
 
 @layer base {
