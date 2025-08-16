@@ -361,7 +361,7 @@ const Index = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="group hover:shadow-2xl transition-all duration-700 border-0 bg-gradient-to-br from-background to-muted/30 hover:-translate-y-2">
+            <Card className="group hover:shadow-2xl transition-all duration-700 border-0 bg-gradient-to-br from-background to-muted/30 hover:-translate-y-2 rounded-2xl">
               <CardContent className="p-8 text-center">
                 <Heart className="h-12 w-12 mx-auto mb-6 text-muted-foreground group-hover:text-red-500 group-hover:scale-110 transition-all duration-500" />
                 <h3 className="text-2xl font-semibold mb-4 transition-all duration-700 group-hover:bg-gradient-to-r group-hover:from-primary group-hover:via-purple-600 group-hover:to-pink-600 group-hover:bg-clip-text group-hover:text-transparent">Heartfelt Connection</h3>
@@ -369,7 +369,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="group hover:shadow-2xl transition-all duration-700 border-0 bg-gradient-to-br from-background to-muted/30 hover:-translate-y-2">
+            <Card className="group hover:shadow-2xl transition-all duration-700 border-0 bg-gradient-to-br from-background to-muted/30 hover:-translate-y-2 rounded-2xl">
               <CardContent className="p-8 text-center">
                 <Mail className="h-12 w-12 mx-auto mb-6 text-muted-foreground group-hover:text-blue-500 group-hover:scale-110 transition-all duration-500" />
                 <h3 className="text-2xl font-semibold mb-4 transition-all duration-700 group-hover:bg-gradient-to-r group-hover:from-primary group-hover:via-purple-600 group-hover:to-pink-600 group-hover:bg-clip-text group-hover:text-transparent">Beautiful Presentation</h3>
@@ -377,7 +377,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="group hover:shadow-2xl transition-all duration-700 border-0 bg-gradient-to-br from-background to-muted/30 hover:-translate-y-2">
+            <Card className="group hover:shadow-2xl transition-all duration-700 border-0 bg-gradient-to-br from-background to-muted/30 hover:-translate-y-2 rounded-2xl">
               <CardContent className="p-8 text-center">
                 <Users className="h-12 w-12 mx-auto mb-6 text-muted-foreground group-hover:text-green-500 group-hover:scale-110 transition-all duration-500" />
                 <h3 className="text-2xl font-semibold mb-4 transition-all duration-700 group-hover:bg-gradient-to-r group-hover:from-primary group-hover:via-purple-600 group-hover:to-pink-600 group-hover:bg-clip-text group-hover:text-transparent">Personal Touch</h3>
@@ -623,7 +623,7 @@ const Index = () => {
       </section>
 
       {/* Delivery Info Section */}
-      <section className="py-32 px-6 mt-32 pt-20 bg-gradient-to-r from-pink-50/30 to-purple-50/30 relative overflow-hidden z-10">
+      <section className="py-32 px-6 bg-gradient-to-r from-pink-50/30 to-purple-50/30 relative overflow-hidden z-10">
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <div className="mb-12">
             <p className="text-2xl font-medium text-primary times-new-roman-italic mb-6">
