@@ -250,15 +250,7 @@ const ContactForm = () => {
             </p>
           </div>
 
-          <Button type="submit" className="sparkle-button w-full h-14 text-lg bg-gradient-to-r from-primary to-purple-600 rounded-xl">
-            <div className="star-1">⭐</div>
-            <div className="star-2">✨</div>
-            <div className="star-3">❤️</div>
-            <div className="star-4">🎁</div>
-            <div className="star-5">⭐</div>
-            <div className="star-6">✨</div>
-            <div className="star-7">❤️</div>
-            <div className="star-8">🎁</div>
+          <Button type="submit" className="w-full h-14 text-lg bg-gradient-to-r from-primary to-purple-600 rounded-xl hover:opacity-90 transition-opacity">
             <div className="flex items-center gap-3">
               <Send className="h-5 w-5" />
               Send My Story
