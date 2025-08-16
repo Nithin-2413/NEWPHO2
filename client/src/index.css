@@ -745,7 +745,7 @@ html {
 }
 
 /* 3D Carousel Animation */
-@keyframes autoRun {
+@keyframes autoRunSlow {
   from {
     transform: perspective(1000px) rotateX(-16deg) rotateY(0deg);
   }
@@ -754,21 +754,36 @@ html {
   }
 }
 
+.carousel-3d-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+}
+
 .carousel-3d {
-  position: absolute;
+  position: relative;
   width: 200px;
   height: 250px;
-  top: 10%;
-  left: calc(50% - 100px);
+  margin: 25px auto;
   transform-style: preserve-3d;
-  transform: perspective(1000px);
-  animation: autoRun 20s linear infinite;
-  z-index: 2;
+  transform: perspective(1000px) rotateX(-16deg);
+  animation: autoRunSlow 40s ease-in-out infinite;
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.carousel-3d-container:hover .carousel-3d {
+  animation-play-state: paused;
 }
 
 .carousel-item {
   position: absolute;
   inset: 0 0 0 0;
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.carousel-3d-container:hover .carousel-item {
+  transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(400px) scale(1.1) !important;
 }
 
 .carousel-item img {
@@ -777,27 +792,42 @@ html {
   object-fit: cover;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.model-center {
-  background-size: auto 130%;
-  background-repeat: no-repeat;
-  background-position: top center;
-  z-index: 1;
+.carousel-3d-container:hover .carousel-item img {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  filter: brightness(1.1) contrast(1.1);
 }
 
 @media screen and (max-width: 1023px) {
+  .carousel-3d-container {
+    width: 250px;
+    height: 250px;
+  }
+  
   .carousel-3d {
     width: 160px;
     height: 200px;
-    left: calc(50% - 80px);
+  }
+  
+  .carousel-3d-container:hover .carousel-item {
+    transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(320px) scale(1.1) !important;
   }
 }
 
 @media screen and (max-width: 767px) {
+  .carousel-3d-container {
+    width: 200px;
+    height: 200px;
+  }
+  
   .carousel-3d {
-    width: 100px;
+    width: 120px;
     height: 150px;
-    left: calc(50% - 50px);
+  }
+  
+  .carousel-3d-container:hover .carousel-item {
+    transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(200px) scale(1.1) !important;
   }
 }
