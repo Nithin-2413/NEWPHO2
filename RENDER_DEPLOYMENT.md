@@ -31,10 +31,7 @@ Add the following environment variables in Render dashboard:
 NODE_ENV=production
 NEXT_PUBLIC_SUPABASE_ANON_KEY=<your-supabase-anon-key>
 SUPABASE_SERVICE_ROLE_KEY=<your-supabase-service-key>
-MAILJET_API_KEY=<your-mailjet-api-key>
-MAILJET_API_SECRET=<your-mailjet-secret>
-MAILJET_TEMPLATE_ID_SUBMISSION=7221146
-MAILJET_TEMPLATE_ID_REPLY=7221431
+BREVO_API_KEY=<your-brevo-api-key>
 ADMIN_EMAIL=onaamikaonaamika@gmail.com
 ADMIN_FROM_EMAIL=onaamikasadguru@gmail.com
 ```

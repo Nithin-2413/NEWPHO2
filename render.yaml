@@ -12,14 +12,8 @@ services:
         sync: false
       - key: SUPABASE_SERVICE_ROLE_KEY
         sync: false
-      - key: MAILJET_API_KEY
+      - key: BREVO_API_KEY
         sync: false
-      - key: MAILJET_API_SECRET
-        sync: false
-      - key: MAILJET_TEMPLATE_ID_SUBMISSION
-        value: "7221146"
-      - key: MAILJET_TEMPLATE_ID_REPLY
-        value: "7221431"
       - key: ADMIN_EMAIL
         value: "onaamikaonaamika@gmail.com"
       - key: ADMIN_FROM_EMAIL
