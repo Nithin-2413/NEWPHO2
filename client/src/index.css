@@ -78,51 +78,104 @@
     transition: all 0.8s ease;
   }
   
+  .sparkle-button .star-7 {
+    position: absolute;
+    top: 60%;
+    left: 80%;
+    width: 8px;
+    height: 8px;
+    z-index: -1;
+    opacity: 0;
+    transition: all 1.2s cubic-bezier(0, 0.4, 0, 1.01);
+  }
+  
+  .sparkle-button .star-8 {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 10px;
+    height: 10px;
+    z-index: -1;
+    opacity: 0;
+    transition: all 0.9s cubic-bezier(0, 0.4, 0, 1.01);
+  }
+  
   .sparkle-button:hover .star-1 {
     top: -80%;
     left: -30%;
-    opacity: 1;
+    opacity: 0.4;
     transform: rotate(15deg);
-    filter: drop-shadow(0 0 10px rgba(255, 223, 0, 0.8));
+    filter: drop-shadow(0 0 6px rgba(255, 223, 0, 0.5));
+    animation: fadeOut 2s ease-out 1s forwards;
   }
   
   .sparkle-button:hover .star-2 {
     top: -25%;
     left: 10%;
-    opacity: 1;
+    opacity: 0.3;
     transform: rotate(-20deg);
-    filter: drop-shadow(0 0 8px rgba(255, 182, 193, 0.6));
+    filter: drop-shadow(0 0 4px rgba(255, 182, 193, 0.4));
+    animation: fadeOut 2.5s ease-out 0.8s forwards;
   }
   
   .sparkle-button:hover .star-3 {
     top: 120%;
     left: 25%;
-    opacity: 1;
+    opacity: 0.35;
     transform: rotate(50deg);
-    filter: drop-shadow(0 0 8px rgba(255, 223, 0, 0.7));
+    filter: drop-shadow(0 0 5px rgba(255, 223, 0, 0.4));
+    animation: fadeOut 2.2s ease-out 1.2s forwards;
   }
   
   .sparkle-button:hover .star-4 {
     top: 30%;
     left: 120%;
-    opacity: 1;
-    filter: drop-shadow(0 0 6px rgba(255, 182, 193, 0.5));
+    opacity: 0.3;
+    filter: drop-shadow(0 0 4px rgba(255, 182, 193, 0.3));
+    animation: fadeOut 2.8s ease-out 0.5s forwards;
   }
   
   .sparkle-button:hover .star-5 {
     top: 25%;
     left: -20%;
-    opacity: 1;
+    opacity: 0.4;
     transform: rotate(-25deg);
-    filter: drop-shadow(0 0 8px rgba(255, 223, 0, 0.6));
+    filter: drop-shadow(0 0 5px rgba(255, 223, 0, 0.4));
+    animation: fadeOut 2.3s ease-out 1.5s forwards;
   }
   
   .sparkle-button:hover .star-6 {
     top: -20%;
     left: 80%;
-    opacity: 1;
+    opacity: 0.25;
     transform: rotate(60deg);
-    filter: drop-shadow(0 0 6px rgba(255, 182, 193, 0.4));
+    filter: drop-shadow(0 0 4px rgba(255, 182, 193, 0.3));
+    animation: fadeOut 2.6s ease-out 0.9s forwards;
+  }
+  
+  .sparkle-button:hover .star-7 {
+    top: 140%;
+    left: 110%;
+    opacity: 0.35;
+    transform: rotate(-45deg);
+    filter: drop-shadow(0 0 5px rgba(255, 223, 0, 0.4));
+    animation: fadeOut 2.4s ease-out 1.3s forwards;
+  }
+  
+  .sparkle-button:hover .star-8 {
+    top: -40%;
+    left: -20%;
+    opacity: 0.3;
+    transform: rotate(30deg);
+    filter: drop-shadow(0 0 4px rgba(255, 182, 193, 0.3));
+    animation: fadeOut 2.7s ease-out 0.7s forwards;
+  }
+  
+  @keyframes fadeOut {
+    to {
+      opacity: 0;
+      transform: scale(0.5);
+    }
   }
 }
 

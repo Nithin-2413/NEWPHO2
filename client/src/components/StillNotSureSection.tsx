@@ -41,12 +41,14 @@ const StillNotSureSection = () => {
           size="lg" 
           className="sparkle-button bg-gradient-to-r from-primary to-purple-600 text-white px-8 py-4 text-lg group hover:scale-105 hover:shadow-2xl transition-all duration-300"
         >
-          <div className="star-1">✨</div>
-          <div className="star-2">⭐</div>
-          <div className="star-3">✨</div>
-          <div className="star-4">💫</div>
+          <div className="star-1">⭐</div>
+          <div className="star-2">✨</div>
+          <div className="star-3">❤️</div>
+          <div className="star-4">🎁</div>
           <div className="star-5">⭐</div>
           <div className="star-6">✨</div>
+          <div className="star-7">❤️</div>
+          <div className="star-8">🎁</div>
           Let's Start Your Message
           <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
         </Button>
