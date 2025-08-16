@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kabootar — Personal reply</title>
+
+  <!-- Optional: most email clients ignore external fonts, but this won't trigger spam filters.
+       Keep it if you prefer the Great Vibes heading when supported. -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+</head>
+
+<body style="margin:0;padding:0;background:#f8f7f6;font-family: 'Comic Sans MS', ComicSans, cursive, Arial, sans-serif; color:#333333;">
+
+  <!-- Hidden preview / preheader -->
+  <div style="display:none!important;visibility:hidden;opacity:0;height:0;width:0;overflow:hidden;mso-hide:all;">
+    A personal reply to your message from Kabootar — reply to continue.
+  </div>
+
+  <div role="article" aria-label="Kabootar reply" style="padding:24px 12px;">
+    <div style="max-width:700px;margin:0 auto;background:#ffffff;border-radius:10px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,0.06);">
+
+      <!-- Header -->
+      <div style="padding:22px 20px;text-align:center;background:linear-gradient(90deg,#f16a85,#f78c9e,#f16a85);color:#ffffff;">
+        <h1 style="margin:0;font-size:28px;font-family:'Great Vibes', 'Comic Sans MS', cursive;line-height:1.2;letter-spacing:0.5px;">
+          You’ve Got a Kabootar
+        </h1>
+        <p style="margin:6px 0 0;font-size:14px;opacity:0.95;font-family:'Comic Sans MS', cursive, Arial, sans-serif;">
+          A personal reply to your heartfelt message
+        </p>
+      </div>
+
+      <!-- Body -->
+      <div style="padding:20px 24px;background:#ffffff;">
+        <p style="margin:0 0 14px;font-size:15px;">
+          Hi {{client_name}},
+        </p>
+
+        <div style="background:#fff5f7;border-radius:8px;padding:16px 18px;border:1px solid #f9ccd3;">
+          <p style="margin:0;font-size:15px;line-height:1.6;text-align:justify;color:#2f2f2f;">
+            {{reply_message}}
+          </p>
+        </div>
+
+        <p style="margin:12px 0 0;font-size:15px;">
+          To continue, simply reply to this email and we'll get back to you.
+        </p>
+
+        <p style="margin:12px 0 0;font-size:13px;color:#666;">
+          This message is a direct reply to the message you sent — no marketing, no promotions.
+        </p>
+      </div>
+
+      <!-- Footer -->
+      <div style="padding:14px 24px 22px;background:#ffffff;border-top:1px solid #f6dede;text-align:center;font-size:12px;color:#777;">
+        <div style="margin-bottom:8px;">
+          <span style="font-weight:600;font-size:16px;color:#f16a85;font-family:'Great Vibes', 'Comic Sans MS', cursive;line-height:1.2;letter-spacing:0.5px;">Sending smiles with Kabootar</span>
+        </div>
+
+        <div style="margin-top:8px;">
+          <a href="{{unsubscribe_url}}" style="color:#f16a85;text-decoration:none;font-size:13px;">Unsubscribe</a>
+          <span style="color:#ccc;margin:0 8px;">•</span>
+          <a href="{{preferences_url}}" style="color:#f16a85;text-decoration:none;font-size:13px;">Update preferences</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
