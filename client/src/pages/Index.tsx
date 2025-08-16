@@ -546,6 +546,69 @@ const Index = () => {
         </div>
       </section>
 
+      {/* The Art of Saying It Right - 3D Carousel Section */}
+      <section className="py-32 px-6 bg-gradient-to-b from-background to-pink-50/20 relative overflow-hidden z-10">
+        <div className="banner relative w-full h-[100vh] text-center overflow-hidden">
+          {/* 3D Carousel */}
+          <div className="carousel-3d" style={{"--quantity": 9} as React.CSSProperties}>
+            {[
+              "https://res.cloudinary.com/dwmybitme/image/upload/v1755356947/Special_Occasion_designed_wooden_boxes_5_as4sup.png",
+              "https://res.cloudinary.com/dwmybitme/image/upload/v1755356958/Special_Occasion_designed_wooden_boxes_yumtwe.png",
+              "https://res.cloudinary.com/dwmybitme/image/upload/v1755356951/Untitled_design_5_ar557f.png",
+              "https://res.cloudinary.com/dwmybitme/image/upload/v1755356969/Untitled_design_3_iji6n1.png",
+              "https://res.cloudinary.com/dwmybitme/image/upload/v1755356965/Untitled_design_4_hwtmhw.png",
+              "https://res.cloudinary.com/dwmybitme/image/upload/v1755356950/Special_Occasion_designed_wooden_boxes_4_ak7pmn.png",
+              "https://res.cloudinary.com/dwmybitme/image/upload/v1755356946/Special_Occasion_designed_wooden_boxes_3_e8e2zj.png",
+              "https://res.cloudinary.com/dwmybitme/image/upload/v1755356945/Special_Occasion_designed_wooden_boxes_1_r5x26x.png",
+              "https://res.cloudinary.com/dwmybitme/image/upload/v1755356949/Special_Occasion_designed_wooden_boxes_2_ai7htr.png"
+            ].map((image, index) => (
+              <div 
+                key={index} 
+                className="carousel-item" 
+                style={{
+                  "--position": index + 1,
+                  transform: `rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(300px)`
+                } as React.CSSProperties}
+              >
+                <img src={image} alt={`Gallery ${index + 1}`} />
+              </div>
+            ))}
+          </div>
+
+          {/* Content */}
+          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-6xl h-max pb-20 flex flex-wrap justify-between items-center z-10">
+            <div className="w-full lg:w-auto text-center lg:text-left mb-8 lg:mb-0">
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-none text-foreground relative mb-4">
+                <span className="bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  The Art of
+                </span>
+                <br />
+                <span className="text-foreground">
+                  Saying It Right
+                </span>
+              </h1>
+            </div>
+
+            <div className="w-full lg:w-auto lg:max-w-sm text-center lg:text-right">
+              <p className="text-xl md:text-2xl font-medium text-primary times-new-roman-italic mb-4">
+                These moments began with someone's feelings and ended with someone's smile.
+              </p>
+            </div>
+          </div>
+
+          {/* Center Model Image */}
+          <div 
+            className="model-center absolute bottom-0 left-0 w-full h-3/4 z-5"
+            style={{
+              backgroundImage: `url(https://res.cloudinary.com/dwmybitme/image/upload/v1755357136/ChatGPT_Image_Aug_12__2025__12_41_08_AM-removebg-preview_1_ppsbkf.png)`,
+              backgroundSize: 'auto 130%',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'top center'
+            }}
+          />
+        </div>
+      </section>
+
       {/* Delivery Info Section */}
       <section className="py-20 px-6 bg-gradient-to-r from-pink-50/30 to-purple-50/30 relative overflow-hidden z-10">
         <div className="max-w-4xl mx-auto text-center relative z-10">
