@@ -82,6 +82,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         .select()
         .single();
 
+      console.log('Form submission location data:', {
+        hasLocation: !!validatedData.location,
+        locationCity: locationCity,
+        originalLocation: validatedData.location
+      });
+
       if (error) throw error;
 
       // Send email notification using Brevo
@@ -381,13 +387,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
         if (location) {
           try {
             const locationString = `${location.city || 'Unknown City'}, ${location.country || 'Unknown Country'} (${location.latitude}, ${location.longitude})`;
-            await supabaseAdmin
+            const { error: logError } = await supabaseAdmin
               .from('admin_logins')
               .insert([{
                 location: locationString,
-                ip_address: req.ip || req.connection.remoteAddress || 'unknown',
-                user_agent: req.get('User-Agent') || 'unknown'
+                ip_address: req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'unknown',
+                user_agent: req.headers['user-agent'] || 'unknown'
               }]);
+            
+            if (logError) {
+              console.error('Failed to log admin login:', logError);
+            } else {
+              console.log('Admin login logged successfully:', locationString);
+            }
           } catch (logError) {
             console.error('Failed to log admin login:', logError);
             // Don't fail the login if logging fails

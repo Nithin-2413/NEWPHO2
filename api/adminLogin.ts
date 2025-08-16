@@ -37,7 +37,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             .from('admin_logins')
             .insert([{
               location: locationString,
-              ip_address: req.headers['x-forwarded-for'] || req.connection?.remoteAddress || 'unknown',
+              ip_address: (req.headers['x-forwarded-for'] as string) || req.socket?.remoteAddress || 'unknown',
               user_agent: req.headers['user-agent'] || 'unknown'
             }]);
           

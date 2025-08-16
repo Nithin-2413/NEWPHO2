@@ -95,6 +95,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       `${validatedData.location.city || 'Unknown City'}, ${validatedData.location.country || 'Unknown Country'}` : 
       null;
 
+    console.log('Form submission with location:', {
+      hasLocation: !!validatedData.location,
+      locationCity: locationCity,
+      originalLocation: validatedData.location
+    });
+
     const { data: hug, error } = await supabaseAdmin
       .from('written hug')
       .insert([{
