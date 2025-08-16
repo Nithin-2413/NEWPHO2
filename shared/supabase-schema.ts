@@ -16,6 +16,7 @@ export const writtenHug = pgTable("written_hug", {
   Story: varchar("Story"),
   "Specific Details": varchar("Specific Details"),
   "Delivery Type": varchar("Delivery Type"),
+  location_city: text("location_city"),
 });
 
 export const hugReplies = pgTable("hug_replies", {
@@ -29,16 +30,12 @@ export const hugReplies = pgTable("hug_replies", {
   email_sent: text("email_sent").default("false"), // Add missing column
 });
 
-export const adminLoginLogs = pgTable("admin_login_logs", {
+export const adminLogins = pgTable("admin_logins", {
   id: uuid("id").primaryKey().defaultRandom(),
   created_at: timestamp("created_at", { withTimezone: true }).defaultNow(),
-  username: text("username"),
-  latitude: doublePrecision("latitude"),
-  longitude: doublePrecision("longitude"),
-  city: text("city"),
-  country: text("country"),
-  ip_address: text("ip_address"),
+  location: text("location"),
   user_agent: text("user_agent"),
+  ip_address: text("ip_address"),
 });
 
 export const insertWrittenHugSchema = createInsertSchema(writtenHug).omit({

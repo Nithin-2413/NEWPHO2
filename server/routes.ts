@@ -59,6 +59,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const validatedData = submitHugSchema.parse(req.body);
       
       // Insert into Supabase (note: table name has space)
+      const locationCity = validatedData.location ? 
+        `${validatedData.location.city || 'Unknown City'}, ${validatedData.location.country || 'Unknown Country'}` : 
+        null;
+        
       const { data: hug, error } = await supabaseAdmin
         .from('written hug')
         .insert([{
@@ -73,31 +77,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
           'Story': validatedData.story,
           'Specific Details': validatedData.specificDetails || '',
           'Delivery Type': validatedData.deliveryType,
+          'location_city': locationCity,
         }])
         .select()
         .single();
-
-      if (error) throw error;
-
-      // Log user location if provided
-      if (validatedData.location) {
-        try {
-          await supabaseAdmin
-            .from('user_location_logs')
-            .insert([{
-              hug_id: hug.id,
-              latitude: validatedData.location.latitude,
-              longitude: validatedData.location.longitude,
-              city: validatedData.location.city || null,
-              country: validatedData.location.country || null,
-              ip_address: req.ip || req.connection.remoteAddress || 'unknown',
-              user_agent: req.get('User-Agent') || 'unknown'
-            }]);
-        } catch (logError) {
-          console.error('Failed to log user location:', logError);
-          // Don't fail the submission if location logging fails
-        }
-      }
 
       if (error) throw error;
 
@@ -397,14 +380,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
         // Log the admin login with location data
         if (location) {
           try {
+            const locationString = `${location.city || 'Unknown City'}, ${location.country || 'Unknown Country'} (${location.latitude}, ${location.longitude})`;
             await supabaseAdmin
-              .from('admin_login_logs')
+              .from('admin_logins')
               .insert([{
-                username,
-                latitude: location.latitude,
-                longitude: location.longitude,
-                city: location.city || null,
-                country: location.country || null,
+                location: locationString,
                 ip_address: req.ip || req.connection.remoteAddress || 'unknown',
                 user_agent: req.get('User-Agent') || 'unknown'
               }]);

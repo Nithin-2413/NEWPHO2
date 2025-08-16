@@ -14,6 +14,12 @@ const submitHugSchema = z.object({
   feelings: z.string().min(1, "Feelings are required"),
   story: z.string().min(1, "Story is required"),
   specificDetails: z.string().min(1, "Specific details are required"),
+  location: z.object({
+    latitude: z.number(),
+    longitude: z.number(),
+    city: z.string().optional(),
+    country: z.string().optional(),
+  }).optional(),
 });
 
 // Initialize Supabase client
@@ -85,6 +91,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const validatedData = submitHugSchema.parse(req.body);
     
     // Insert into Supabase (note: table name has space)
+    const locationCity = validatedData.location ? 
+      `${validatedData.location.city || 'Unknown City'}, ${validatedData.location.country || 'Unknown Country'}` : 
+      null;
+      
     const { data: hug, error } = await supabaseAdmin
       .from('written hug')
       .insert([{
@@ -100,6 +110,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         'Delivery Type': validatedData.deliveryType,
         'Status': 'New',
         'Date': new Date().toISOString(),
+        'location_city': locationCity,
       }])
       .select()
       .single();
