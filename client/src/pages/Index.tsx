@@ -370,7 +370,15 @@ const Index = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="group hover:shadow-2xl transition-all duration-700 border-0 bg-gradient-to-br from-background to-muted/30 hover:-translate-y-2">
+            <Card className="sparkle-button group hover:shadow-2xl transition-all duration-700 border-0 bg-gradient-to-br from-background to-muted/30 hover:-translate-y-2">
+              <div className="star-1">⭐</div>
+              <div className="star-2">✨</div>
+              <div className="star-3">❤️</div>
+              <div className="star-4">🎁</div>
+              <div className="star-5">⭐</div>
+              <div className="star-6">✨</div>
+              <div className="star-7">❤️</div>
+              <div className="star-8">🎁</div>
               <CardContent className="p-8 text-center">
                 <Heart className="h-12 w-12 mx-auto mb-6 text-muted-foreground group-hover:text-red-500 group-hover:scale-110 transition-all duration-500" />
                 <h3 className="text-2xl font-semibold mb-4">Heartfelt Connection</h3>
@@ -378,7 +386,15 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="group hover:shadow-2xl transition-all duration-700 border-0 bg-gradient-to-br from-background to-muted/30 hover:-translate-y-2">
+            <Card className="sparkle-button group hover:shadow-2xl transition-all duration-700 border-0 bg-gradient-to-br from-background to-muted/30 hover:-translate-y-2">
+              <div className="star-1">⭐</div>
+              <div className="star-2">✨</div>
+              <div className="star-3">❤️</div>
+              <div className="star-4">🎁</div>
+              <div className="star-5">⭐</div>
+              <div className="star-6">✨</div>
+              <div className="star-7">❤️</div>
+              <div className="star-8">🎁</div>
               <CardContent className="p-8 text-center">
                 <Mail className="h-12 w-12 mx-auto mb-6 text-muted-foreground group-hover:text-blue-500 group-hover:scale-110 transition-all duration-500" />
                 <h3 className="text-2xl font-semibold mb-4">Beautiful Presentation</h3>
@@ -386,7 +402,15 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="group hover:shadow-2xl transition-all duration-700 border-0 bg-gradient-to-br from-background to-muted/30 hover:-translate-y-2">
+            <Card className="sparkle-button group hover:shadow-2xl transition-all duration-700 border-0 bg-gradient-to-br from-background to-muted/30 hover:-translate-y-2">
+              <div className="star-1">⭐</div>
+              <div className="star-2">✨</div>
+              <div className="star-3">❤️</div>
+              <div className="star-4">🎁</div>
+              <div className="star-5">⭐</div>
+              <div className="star-6">✨</div>
+              <div className="star-7">❤️</div>
+              <div className="star-8">🎁</div>
               <CardContent className="p-8 text-center">
                 <Users className="h-12 w-12 mx-auto mb-6 text-muted-foreground group-hover:text-green-500 group-hover:scale-110 transition-all duration-500" />
                 <h3 className="text-2xl font-semibold mb-4">Personal Touch</h3>
