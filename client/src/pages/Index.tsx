@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -17,6 +16,9 @@ const Index = () => {
   const [scrollY, setScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const fadeDuration = 1000; // 1 second fade time
+  const targetVolume = 0.10; // 10% volume
+  let isPlaying = false;
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -27,98 +29,110 @@ const Index = () => {
     const setupBackgroundMusic = () => {
       if (audioRef.current) {
         const audio = audioRef.current;
-        audio.volume = 0.10; // Set volume to 10% for very soft ambient sound
         audio.loop = true;
         audio.preload = 'auto';
-        audio.autoplay = true;
-        audio.muted = false;
-        
-        // Smooth fade out function (3 seconds)
-        const fadeOut = (duration = 3000) => {
+
+        // Smooth fade out function
+        const fadeOut = (duration = fadeDuration) => {
           const startVolume = audio.volume;
           const steps = 60; // 60 steps for smooth fade
           const volumeStep = startVolume / steps;
           const timeStep = duration / steps;
-          
+
           const fadeInterval = setInterval(() => {
             if (audio.volume > 0) {
               audio.volume = Math.max(audio.volume - volumeStep, 0);
             } else {
               audio.pause();
               clearInterval(fadeInterval);
+              isPlaying = false;
             }
           }, timeStep);
         };
 
-        // Smooth fade in function (3 seconds)
-        const fadeIn = (targetVolume = 0.10, duration = 3000) => {
+        // Smooth fade in function
+        const fadeIn = (duration = fadeDuration) => {
           audio.volume = 0;
           const steps = 60;
           const volumeStep = targetVolume / steps;
           const timeStep = duration / steps;
-          
+
           const fadeInterval = setInterval(() => {
             if (audio.volume < targetVolume) {
               audio.volume = Math.min(audio.volume + volumeStep, targetVolume);
             } else {
               clearInterval(fadeInterval);
+              isPlaying = true;
             }
           }, timeStep);
         };
 
-        // Aggressive auto-play for all devices
-        const playMusic = async (useFadeIn = true) => {
-          const startAudio = () => {
-            if (useFadeIn) {
-              fadeIn(0.10, 3000);
-            } else {
-              audio.volume = 0.10;
-            }
-          };
+        // Enhanced play music function with fade in
+        const playMusic = (useFadeIn = false) => {
+          if (isPlaying) return;
 
-          // Strategy 1: Direct play
-          try {
-            await audio.play();
-            startAudio();
-            console.log('Music started automatically');
-            return;
-          } catch (e) {
-            console.log('Direct play failed, trying muted approach');
-          }
-
-          // Strategy 2: Muted play then unmute
-          try {
-            audio.muted = true;
-            await audio.play();
-            audio.muted = false;
-            startAudio();
-            console.log('Music started with muted workaround');
-            return;
-          } catch (e) {
-            console.log('Muted approach failed, setting up interaction listeners');
-          }
-
-          // Strategy 3: Comprehensive interaction listeners
-          const startMusic = async () => {
+          const attemptPlay = async () => {
             try {
+              audio.currentTime = 0;
               await audio.play();
-              startAudio();
-              console.log('Music started on user interaction');
-              // Remove all listeners
-              ['click', 'touchstart', 'touchend', 'scroll', 'mousemove', 'keydown', 'focus'].forEach(event => {
-                document.removeEventListener(event, startMusic);
-                window.removeEventListener(event, startMusic);
-              });
-            } catch (err) {
-              console.log('Failed to start music even with interaction:', err);
+              isPlaying = true;
+              if (useFadeIn) {
+                fadeIn(fadeDuration); // 1 second fade in
+              } else {
+                audio.volume = targetVolume;
+              }
+              console.log('Background music started successfully');
+            } catch (error) {
+              console.log('Direct play failed, trying muted approach');
+              try {
+                audio.muted = true;
+                await audio.play();
+                isPlaying = true;
+                setTimeout(() => {
+                  audio.muted = false;
+                  if (useFadeIn) {
+                    fadeIn(fadeDuration);
+                  } else {
+                    audio.volume = targetVolume;
+                  }
+                }, 100);
+                console.log('Muted approach successful');
+              } catch (mutedError) {
+                console.log('Muted approach failed, setting up interaction listeners');
+                setupUserInteractionListeners();
+              }
             }
           };
-            
-          // Add comprehensive interaction listeners
-          ['click', 'touchstart', 'touchend', 'scroll', 'mousemove', 'keydown'].forEach(event => {
+
+          attemptPlay();
+        };
+
+        // Setup user interaction listeners for browsers that block autoplay
+        const setupUserInteractionListeners = () => {
+          const startMusic = () => {
+            if (!isPlaying) {
+              playMusic(true);
+            }
+            // Remove all listeners after first successful interaction
+            ['click', 'touchstart', 'touchend', 'keydown', 'scroll', 'mousemove'].forEach(event => {
+              document.removeEventListener(event, startMusic);
+            });
+          };
+
+          // Add multiple interaction listeners for better mobile support
+          ['click', 'touchstart', 'touchend', 'keydown', 'scroll', 'mousemove'].forEach(event => {
             document.addEventListener(event, startMusic, { once: true, passive: true });
           });
-          window.addEventListener('focus', startMusic, { once: true });
+
+          // Special handling for mobile devices
+          if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            // Try to play after a short delay on mobile
+            setTimeout(() => {
+              if (!isPlaying) {
+                playMusic(true);
+              }
+            }, 1000);
+          }
         };
 
         // Handle page visibility change with fade out/in
@@ -126,13 +140,13 @@ const Index = () => {
           if (document.visibilityState === 'visible') {
             playMusic(true); // Use fade in
           } else {
-            fadeOut(3000); // 3 second fade out
+            fadeOut(fadeDuration); // 3 second fade out
           }
         };
 
         // Start music immediately
         playMusic(true);
-        
+
         document.addEventListener('visibilitychange', handleVisibilityChange);
 
         return () => {
@@ -141,10 +155,13 @@ const Index = () => {
       }
     };
 
-    const cleanup = setupBackgroundMusic();
+    setupBackgroundMusic();
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      if (cleanup) cleanup();
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
     };
   }, []);
 
@@ -190,7 +207,7 @@ const Index = () => {
     <div className="min-h-screen bg-background overflow-hidden premium-scroll relative">
       {/* Cosmic Premium Background */}
       <div className="cosmic-background"></div>
-      
+
       {/* Animated Star Background */}
       <div className="star-background">
         <div id="stars"></div>
@@ -220,7 +237,7 @@ const Index = () => {
         <div className="absolute top-[800px] left-1/4 animate-float delay-2000 opacity-25">
           <Heart className="w-5 h-5 text-red-300 fill-current" />
         </div>
-        
+
         {/* Star elements */}
         <div className="absolute top-48 right-32 animate-float delay-500 opacity-20">
           <Star className="w-5 h-5 text-yellow-300 fill-current" />
@@ -231,7 +248,7 @@ const Index = () => {
         <div className="absolute top-[1200px] right-16 animate-float delay-2500 opacity-20">
           <Star className="w-4 h-4 text-orange-300 fill-current" />
         </div>
-        
+
         {/* Gift elements */}
         <div className="absolute top-[400px] right-24 animate-float delay-700 opacity-15">
           <Gift className="w-5 h-5 text-purple-300" />
@@ -239,7 +256,7 @@ const Index = () => {
         <div className="absolute top-[1000px] left-32 animate-float delay-1800 opacity-20">
           <Gift className="w-6 h-6 text-indigo-300" />
         </div>
-        
+
         {/* Sparkles elements */}
         <div className="absolute top-64 left-1/3 animate-float delay-1200 opacity-15">
           <Sparkles className="w-5 h-5 text-pink-300" />
@@ -250,7 +267,7 @@ const Index = () => {
         <div className="absolute top-[1400px] left-1/2 animate-float delay-3000 opacity-15">
           <Sparkles className="w-6 h-6 text-fuchsia-300" />
         </div>
-        
+
         {/* Additional floating dots */}
         <div className="absolute top-80 right-1/3 animate-float delay-800 opacity-10">
           <div className="w-3 h-3 bg-pink-400 rounded-full"></div>
@@ -294,7 +311,7 @@ const Index = () => {
         <div className={`absolute inset-0 bg-gradient-to-br from-pink-50/20 to-purple-50/20 transition-all duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`} 
              style={{ transform: `translateY(${scrollY * 0.1}px)` }} />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,182,193,0.08),transparent_50%)]" />
-        
+
         {/* Elegant Floating Elements */}
         <div className="absolute top-20 left-10 animate-float opacity-40">
           <div className="w-6 h-6 text-pink-300/60">
@@ -311,7 +328,7 @@ const Index = () => {
             <Heart className="w-full h-full fill-current" />
           </div>
         </div>
-        
+
         <div className={`text-center max-w-5xl mx-auto relative z-10 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight">
             <TypingAnimation 
@@ -320,17 +337,17 @@ const Index = () => {
               className="bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent"
             />
           </h1>
-          
+
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 leading-relaxed times-new-roman-italic">
             Your feelings. My words. Their smile.
           </p>
-          
+
           <p className="text-lg md:text-xl text-muted-foreground mb-12 leading-relaxed">
             We help you express what your heart holds but words can't quite say.
             <br />
             In every unspoken moment, there lives a feeling waiting for its voice—let us help you set it free.
           </p>
-          
+
           <div className="flex justify-center">
             <Button onClick={scrollToContact} size="lg" className="sparkle-button bg-gradient-to-r from-primary to-purple-600 text-white px-8 py-4 text-lg group hover:scale-105 hover:shadow-2xl transition-all duration-300">
               <div className="star-1">⭐</div>
@@ -420,7 +437,7 @@ const Index = () => {
             <p className="text-xl font-medium text-primary times-new-roman-italic">
               It started with a "HELP!" message at 11:11 PM.
             </p>
-            
+
             <p>
               A friend had something important to say—something heartfelt, something that mattered—but no clue how to put it into words. They tried. And failed. Then panicked. Then called Onaamika.
             </p>
@@ -550,16 +567,16 @@ const Index = () => {
                 {index < 3 && (
                   <div className="hidden md:block absolute top-10 left-full w-full h-0.5 bg-gradient-to-r from-muted-foreground/20 to-transparent transform translate-x-4 z-0"></div>
                 )}
-                
+
                 <div className="relative z-10">
                   <div className={`w-20 h-20 mx-auto mb-6 bg-gradient-to-r ${item.color} rounded-full flex items-center justify-center text-white text-xl font-bold group-hover:scale-110 transition-all duration-500 shadow-lg group-hover:shadow-2xl`}>
                     <span>{item.step}</span>
                   </div>
-                  
+
                   <div className="mb-4 group-hover:scale-110 transition-transform duration-300">
                     <item.icon className="w-8 h-8 mx-auto text-muted-foreground group-hover:text-primary transition-colors duration-300" />
                   </div>
-                  
+
                   <h3 className="text-xl font-semibold mb-4 transition-all duration-700 group-hover:bg-gradient-to-r group-hover:from-primary group-hover:via-purple-600 group-hover:to-pink-600 group-hover:bg-clip-text group-hover:text-transparent">{item.title}</h3>
                   <p className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">{item.desc}</p>
                 </div>
@@ -577,7 +594,7 @@ const Index = () => {
               Your feelings, perfectly packaged, arrive exactly where they're meant to live—in the heart.
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             <div className="flex flex-col items-center group">
               <MapPin className="h-12 w-12 text-muted-foreground group-hover:text-green-500 group-hover:scale-110 transition-all duration-500 mb-4" />
