@@ -33,13 +33,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       if (location) {
         try {
           const locationString = `${location.city || 'Unknown City'}, ${location.country || 'Unknown Country'} (${location.latitude}, ${location.longitude})`;
-          await supabaseAdmin
+          const { error: logError } = await supabaseAdmin
             .from('admin_logins')
             .insert([{
               location: locationString,
               ip_address: req.headers['x-forwarded-for'] || req.connection?.remoteAddress || 'unknown',
               user_agent: req.headers['user-agent'] || 'unknown'
             }]);
+          
+          if (logError) {
+            console.error('Failed to log admin login:', logError);
+          }
         } catch (logError) {
           console.error('Failed to log admin login:', logError);
           // Don't fail the login if logging fails

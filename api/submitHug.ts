@@ -89,12 +89,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     const validatedData = submitHugSchema.parse(req.body);
-    
+
     // Insert into Supabase (note: table name has space)
     const locationCity = validatedData.location ? 
       `${validatedData.location.city || 'Unknown City'}, ${validatedData.location.country || 'Unknown Country'}` : 
       null;
-      
+
     const { data: hug, error } = await supabaseAdmin
       .from('written hug')
       .insert([{
