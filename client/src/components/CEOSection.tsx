@@ -34,20 +34,20 @@ const CEOSection = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 items-center">
           <div className="relative flex justify-center lg:justify-end">
             <div className="ceo-image-container">
               <img
                 src="https://res.cloudinary.com/dwmybitme/image/upload/v1755338743/1001541430-removebg-preview_yll5d7.png"
                 alt="Onaamika Sadguru"
-                className="ceo-image"
+                className="ceo-image w-80 h-80 object-cover rounded-full border-4 border-primary/20"
               />
             </div>
           </div>
 
-          <div className="space-y-8">
+          <div className="space-y-6 text-center lg:text-left">
             <div className="relative">
-              <h3 className="text-4xl font-bold mb-6 bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+              <h3 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
                 Onaamika Sadguru
               </h3>
             </div>
